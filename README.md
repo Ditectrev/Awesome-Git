@@ -49,17 +49,20 @@ There are many ways to support us; in exchange, you'll get this material in a pr
    - Conflicts and History Repair in the Browser;
    - Releases, Ignore Files, and Repository Hygiene;
    - Collaboration, Access, and Other Git Hosts;
-   - GitLab in the Browser:
-     - Merge Requests vs Pull Requests;
    - Common Challenges and Debugging Tips;
    - Additional Resources and Reading Materials:
+     - Recommended Tools and Software for Git;
+     - Other Git Hosts;
      - Git on Your Own Machine;
-   - Appendix A: Rebase and Rewriting History;
+     - Git Aliases;
+   - Appendix A: Rebase and Rewriting History:
+     - git push --force;
    - Appendix B: Cherry-pick, Reset, Reflog, and Bisect;
    - Appendix C: Git Internals;
    - Appendix D: Submodules, Subtrees, and Monorepos;
    - Appendix E: Git LFS, Sparse Checkout, and Large Repos;
    - Appendix F: Signing, SSH, Hooks, and CI Checks;
+   - Appendix G: Restore, Stash, and Clean Working Trees;
    - **Much More!**
 4. Real Life examples ✅
 5. The book & course explains the topic fully in-depth 🔬
@@ -128,6 +131,7 @@ We are so thankful for every contribution, which makes sure we can deliver top-n
   - [Personal vs Organization Repositories](#personal-vs-organization-repositories)
   - [Public, Private, and Internal Visibility](#public-private-and-internal-visibility)
   - [github.dev: VS Code in the Browser](#githubdev-vs-code-in-the-browser)
+    - [Extensions That Work in github.dev](#extensions-that-work-in-githubdev)
   - [Learn Git Branching as a Visual Sandbox](#learn-git-branching-as-a-visual-sandbox)
   - [GitHub Codespaces as an Optional Cloud Machine](#github-codespaces-as-an-optional-cloud-machine)
   - [Summary: The Browser Lab](#summary-the-browser-lab)
@@ -187,35 +191,41 @@ We are so thankful for every contribution, which makes sure we can deliver top-n
   - [Branch Protection and Rulesets](#branch-protection-and-rulesets)
   - [CODEOWNERS and Required Reviews](#codeowners-and-required-reviews)
   - [Issues, Projects, and Discussions Around the Git Graph](#issues-projects-and-discussions-around-the-git-graph)
-  - [Bitbucket, Codeberg, and Azure Repos in the Browser](#bitbucket-codeberg-and-azure-repos-in-the-browser)
+  - [GitLab, Bitbucket, Codeberg, and Azure Repos](#gitlab-bitbucket-codeberg-and-azure-repos)
   - [Summary: Collaboration, Access, and Other Git Hosts](#summary-collaboration-access-and-other-git-hosts)
-- [GitLab in the Browser](#gitlab-in-the-browser)
-  - [Creating a GitLab Account](#creating-a-gitlab-account)
-  - [Creating a Project on GitLab](#creating-a-project-on-gitlab)
-  - [Commits in the GitLab Web IDE](#commits-in-the-gitlab-web-ide)
-  - [Branches on GitLab](#branches-on-gitlab)
-  - [Merge Requests vs Pull Requests](#merge-requests-vs-pull-requests)
-  - [Resolving a Conflict on GitLab](#resolving-a-conflict-on-gitlab)
-  - [Summary: GitLab in the Browser](#summary-gitlab-in-the-browser)
 - [Common Challenges and Debugging Tips](#common-challenges-and-debugging-tips)
   - [I Committed to the Wrong Branch](#i-committed-to-the-wrong-branch)
   - [I Committed a Secret](#i-committed-a-secret)
   - [The Pull Request Is Too Big to Review](#the-pull-request-is-too-big-to-review)
   - [GitHub Still Shows master as the Default Branch](#github-still-shows-master-as-the-default-branch)
   - [The Merge Button Is Blocked](#the-merge-button-is-blocked)
-  - [The GitLab Merge Request Pipeline Is Blocked](#the-gitlab-merge-request-pipeline-is-blocked)
   - [A 30-Day Browser-Only Practice Plan](#a-30-day-browser-only-practice-plan)
   - [Summary: Common Challenges and Debugging Tips](#summary-common-challenges-and-debugging-tips)
 - [Additional Resources and Reading Materials](#additional-resources-and-reading-materials)
   - [Recommended Tools and Software for Git](#recommended-tools-and-software-for-git)
+    - [VS Code and github.dev](#vs-code-and-githubdev)
+    - [GitHub Pull Requests](#github-pull-requests)
+    - [GitLens](#gitlens)
+    - [Git Graph](#git-graph)
+    - [Which Extensions Work in github.dev Without Local Git](#which-extensions-work-in-githubdev-without-local-git)
+    - [Chrome Extensions for GitHub](#chrome-extensions-for-github)
+    - [Refined GitHub](#refined-github)
+    - [Octotree](#octotree)
+    - [Chrome DevTools Has No Git Panel](#chrome-devtools-has-no-git-panel)
   - [Official Docs and Hosted Playgrounds](#official-docs-and-hosted-playgrounds)
   - [Further Reading and Industry Publications](#further-reading-and-industry-publications)
+  - [Other Git Hosts](#other-git-hosts)
   - [Git on Your Own Machine](#git-on-your-own-machine)
     - [When the Command Line Becomes Worth It](#when-the-command-line-becomes-worth-it)
     - [Installing Git](#installing-git)
     - [Mapping Web Buttons to Git Commands](#mapping-web-buttons-to-git-commands)
     - [clone, status, add, commit, push, and pull](#clone-status-add-commit-push-and-pull)
     - [GitHub Desktop, GitHub CLI, and GitLab CLI](#github-desktop-github-cli-and-gitlab-cli)
+  - [Git Aliases](#git-aliases)
+    - [What an Alias Is](#what-an-alias-is)
+    - [Local vs Global vs System](#local-vs-global-vs-system)
+    - [Useful Starter Aliases](#useful-starter-aliases)
+    - [Aliases Have No GitHub Web UI](#aliases-have-no-github-web-ui)
   - [Summary: Additional Resources and Reading Materials](#summary-additional-resources-and-reading-materials)
 - [Appendix A: Rebase and Rewriting History](#appendix-a-rebase-and-rewriting-history)
   - [Why Rebase Exists](#why-rebase-exists)
@@ -223,6 +233,11 @@ We are so thankful for every contribution, which makes sure we can deliver top-n
   - [Visual Rebase in Learn Git Branching](#visual-rebase-in-learn-git-branching)
   - [Interactive Rebase, Squash, and Fixup](#interactive-rebase-squash-and-fixup)
   - [When Not to Rewrite Published History](#when-not-to-rewrite-published-history)
+  - [git push --force](#git-push---force)
+    - [git push --force-with-lease](#git-push---force-with-lease)
+    - [When Force-Pushing Is Allowed vs Rewriting Published History](#when-force-pushing-is-allowed-vs-rewriting-published-history)
+    - [Branch Rules That Block Force Pushes](#branch-rules-that-block-force-pushes)
+    - [No Force-Push Button in the GitHub Web Editor](#no-force-push-button-in-the-github-web-editor)
   - [Summary: Appendix A: Rebase and Rewriting History](#summary-appendix-a-rebase-and-rewriting-history)
 - [Appendix B: Cherry-pick, Reset, Reflog, and Bisect](#appendix-b-cherry-pick-reset-reflog-and-bisect)
   - [Cherry-pick a Single Commit](#cherry-pick-a-single-commit)
@@ -238,12 +253,12 @@ We are so thankful for every contribution, which makes sure we can deliver top-n
   - [Summary: Appendix C: Git Internals](#summary-appendix-c-git-internals)
 - [Appendix D: Submodules, Subtrees, and Monorepos](#appendix-d-submodules-subtrees-and-monorepos)
   - [When One Repo Is Not Enough](#when-one-repo-is-not-enough)
-  - [Submodules on GitHub and GitLab](#submodules-on-github-and-gitlab)
+  - [Submodules on Git Hosts](#submodules-on-git-hosts)
   - [Subtrees as an Alternative](#subtrees-as-an-alternative)
   - [Monorepo Layouts Without Extra Tooling](#monorepo-layouts-without-extra-tooling)
   - [Summary: Appendix D: Submodules, Subtrees, and Monorepos](#summary-appendix-d-submodules-subtrees-and-monorepos)
 - [Appendix E: Git LFS, Sparse Checkout, and Large Repos](#appendix-e-git-lfs-sparse-checkout-and-large-repos)
-  - [Git LFS on GitHub and GitLab](#git-lfs-on-github-and-gitlab)
+  - [Git LFS on Git Hosts](#git-lfs-on-git-hosts)
   - [Sparse Checkout and Partial Clone](#sparse-checkout-and-partial-clone)
   - [What Breaks When a Repo Gets Huge](#what-breaks-when-a-repo-gets-huge)
   - [Summary: Appendix E: Git LFS, Sparse Checkout, and Large Repos](#summary-appendix-e-git-lfs-sparse-checkout-and-large-repos)
@@ -251,5 +266,17 @@ We are so thankful for every contribution, which makes sure we can deliver top-n
   - [SSH Keys and Deploy Keys](#ssh-keys-and-deploy-keys)
   - [Signed Commits and Verified Badges](#signed-commits-and-verified-badges)
   - [Client Hooks vs Host Rulesets](#client-hooks-vs-host-rulesets)
-  - [GitHub Actions and GitLab CI as Merge Gates](#github-actions-and-gitlab-ci-as-merge-gates)
+  - [CI Checks as Merge Gates](#ci-checks-as-merge-gates)
   - [Summary: Appendix F: Signing, SSH, Hooks, and CI Checks](#summary-appendix-f-signing-ssh-hooks-and-ci-checks)
+- [Appendix G: Restore, Stash, and Clean Working Trees](#appendix-g-restore-stash-and-clean-working-trees)
+  - [Discarding Uncommitted Edits in the GitHub Web Editor](#discarding-uncommitted-edits-in-the-github-web-editor)
+  - [git restore](#git-restore)
+    - [Working Tree vs Staged](#working-tree-vs-staged)
+    - [restore vs checkout](#restore-vs-checkout)
+    - [restore vs revert](#restore-vs-revert)
+  - [git stash](#git-stash)
+    - [stash push, pop, apply, drop, and list](#stash-push-pop-apply-drop-and-list)
+    - [Stashing Untracked Files](#stashing-untracked-files)
+    - [Stash vs a WIP Branch](#stash-vs-a-wip-branch)
+  - [git clean](#git-clean)
+  - [Summary: Appendix G: Restore, Stash, and Clean Working Trees](#summary-appendix-g-restore-stash-and-clean-working-trees)
