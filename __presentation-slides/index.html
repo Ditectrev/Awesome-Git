@@ -530,6 +530,314 @@
 * [GitHub](https://github.com/) (2008) added the social-coding web UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
 * Other hosts are a mention, not a lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
 * Next: Core Principles of Git <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+## Core Principles of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Snapshots, Not File Diffs <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Snapshots, Not File Diffs <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Older tools think in deltas (a base file plus line changes) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [CVS](https://www.nongnu.org/cvs/), [Apache Subversion](https://subversion.apache.org/), [Perforce P4](https://www.perforce.com/products/helix-core) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/) stores snapshots of the whole tree <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Source: [Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Snapshots, Not File Diffs <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Each commit is a picture of tracked files at that moment <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Unchanged files reuse the same blob <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A tree names which blob sits at which path <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Internals: [Pro Git: Git Objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Appendix C goes deeper; a commit is not a patch file <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Snapshots, Not File Diffs <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Humans review changes, not entire files <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) *computes* a diff between two snapshots <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Comparing commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/viewing-and-comparing-commits/comparing-commits) is that view <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git data model](https://git-scm.com/docs/gitdatamodel): [Git](https://git-scm.com/) does not store the diff <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Storage is still a snapshot, not a list of diffs <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Snapshots, Not File Diffs <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Every commit is a complete project <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Unchanged files are cheap (shared blobs) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Branches are cheap: a name for a snapshot <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Think snapshots; read diffs <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Three Areas: Working Tree, Staging Area, and Repository <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### The Three Areas: Working Tree, Staging Area, and Repository <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Modified, staged, or committed <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Working tree, staging area, repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Staging area = index <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git data model](https://git-scm.com/docs/gitdatamodel) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Three Areas: Working Tree, Staging Area, and Repository <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Working tree: the files you edit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor): editor tabs <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Unsaved text is not history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Three Areas: Working Tree, Staging Area, and Repository <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Staging area: what the *next* commit will contain <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor): Changes vs Staged Changes <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [VS Code Source Control](https://code.visualstudio.com/docs/sourcecontrol/overview) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) web editor: Commit changes does stage + commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The index still exists when the host hides it <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Three Areas: Working Tree, Staging Area, and Repository <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Repository: blobs, trees, commits, tags, refs <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* This is what a clone copies <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* On [GitHub](https://github.com/): the Commits page, branches, tags <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub Docs: About commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/about-commits) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Three Areas: Working Tree, Staging Area, and Repository <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Edit in the working tree <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Stage what belongs in the next snapshot <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commit stores that snapshot in the repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Learn Git Branching](https://learngitbranching.js.org/) is for the graph, not the index <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No stash button on [GitHub](https://github.com/) (Appendix G) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Commits as Immutable History <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Commits as Immutable History <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Snapshot plus metadata <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Tree, parent(s), author, message <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The hash *is* the commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Pro Git: Git Objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub Docs: About commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/about-commits) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Commits as Immutable History <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* We add; we do not edit in place <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commit changes on [GitHub](https://github.com/) creates a *new* commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The old commit stays in the graph <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/) generally only adds data <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Commits as Immutable History <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Revert adds a commit that undoes an old one <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The mistaken commit remains <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Amend, rebase, force-push: Appendix A <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No force-push button in the basic web editor <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Commits as Immutable History <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Not a pull request (host review object) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Not a backup of untracked files or secrets <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Sloppy message: add a follow-up commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Future work is a new commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Directed Acyclic Graph (DAG) <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### The Directed Acyclic Graph (DAG) <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Directed: each commit points at its parent(s) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Arrows go backward in time <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Acyclic: no loops <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Graph: more than one line of work at once <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Directed Acyclic Graph (DAG) <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Root commit: no parent <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Ordinary commit: one parent <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Merge commit: two or more parents <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Diverged branches: two tips, shared ancestor <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Pro Git: Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Directed Acyclic Graph (DAG) <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A branch is a movable name pointing at a commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Cheap because it is a pointer, not a copy <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Names live on top of the graph <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Pro Git: Git References](https://git-scm.com/book/en/v2/Git-Internals-Git-References) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Click-through: Branches and Merging <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Directed Acyclic Graph (DAG) <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* See it: [Learn Git Branching](https://learngitbranching.js.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Source: [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Does not push to [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Not this chapter's lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Directed Acyclic Graph (DAG) <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [GitHub](https://github.com/) Network graph: Insights → Network <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Understanding connections between repositories](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commits page is the same graph, flattened <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* History is a graph of snapshots, not a numbered list <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Hashes, SHAs, and Why Identity Matters <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Hashes, SHAs, and Why Identity Matters <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Every object is named by a hash of its contents <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Blob, tree, commit, tag <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* You cannot change content without [Git](https://git-scm.com/) knowing <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [hash function transition](https://git-scm.com/docs/hash-function-transition) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Hashes, SHAs, and Why Identity Matters <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [SHA-1](https://csrc.nist.gov/projects/hash-functions): 40 hex characters <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) shortens it in lists (often 7 characters) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The full hash is the identity <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub Docs: About commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/about-commits) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Hashes, SHAs, and Why Identity Matters <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Same bytes → same blob hash <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Change one byte → new blob hash <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Change message, parent, or tree → new commit hash <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Editing history rewrites a chain (Appendix A) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Hashes, SHAs, and Why Identity Matters <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [Git](https://git-scm.com/) successor hash: [SHA-256](https://csrc.nist.gov/projects/hash-functions) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* 64 hex characters <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Spec: [NIST hash functions](https://csrc.nist.gov/projects/hash-functions) / [FIPS 180-4](https://csrc.nist.gov/pubs/fips/180-4/upd1/final) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) main path in this book: [SHA-1](https://csrc.nist.gov/projects/hash-functions) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* You do not need [SHA-256](https://csrc.nist.gov/projects/hash-functions) for this course <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Hashes, SHAs, and Why Identity Matters <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* The SHA is the name of the object <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* URLs, pull requests, compare, revert hang off that ID <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* "The same commit" means the same hash <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Identical content, identical name <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What Distributed Means in Daily Work <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### What Distributed Means in Daily Work <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A repository is a full copy of the graph <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) is one copy with a web UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Not a checkout that still needs "the real server" <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub Docs: About Git](https://docs.github.com/en/get-started/using-git/about-git) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What Distributed Means in Daily Work <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Commit records a snapshot in *this* repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Publish: another copy now has your commits <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Fetch / pull: this copy learns someone else's commits <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Sync fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) is that idea for a fork <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What Distributed Means in Daily Work <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* The [GitHub](https://github.com/) repository: the shared copy we click <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A fork: another full [Git](https://git-scm.com/) repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) talks to the host copy <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Optional: [GitHub Codespaces](https://github.com/features/codespaces) is another clone <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Learn Git Branching](https://learngitbranching.js.org/) is a toy graph, not your repo <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What Distributed Means in Daily Work <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Two copies can point at different tips <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A pull request asks to join those graphs <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Browser path: the host is on the network <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Offline laptop commits: Additional Resources <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What Distributed Means in Daily Work <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [GitLab](https://gitlab.com/), [Bitbucket](https://bitbucket.org/), [Codeberg](https://codeberg.org/), [Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Same [Git](https://git-scm.com/) objects, similar web UI, not our lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Distributed does not mean "there is no [GitHub](https://github.com/)" <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Every complete copy can hold the DAG <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Summary: Core Principles of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Summary: Core Principles of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Snapshots, not a list of file diffs <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Three areas: working tree, staging area, repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commits are immutable; we add, we do not rewrite <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* History is a DAG; a branch is a name on that graph <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The SHA is the name of the object <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Distributed: each complete copy holds the graph <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Next: The Browser Lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
         </textarea>
       </section>
     </div>
