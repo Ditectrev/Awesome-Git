@@ -450,3 +450,153 @@ The next two chapters stay on reading: History and Evolution of Git, then Core P
 ### Summary: Introduction to Git
 
 We covered what [Git](https://git-scm.com/) is (a distributed version control system, not a website), what problem version control solves (history, parallel work, review, recovery), and how [Git](https://git-scm.com/) differs from [GitHub](https://github.com/) and from other hosts ([GitLab](https://gitlab.com/), [Bitbucket](https://bitbucket.org/), [Codeberg](https://codeberg.org/), [Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos) — same [Git](https://git-scm.com/), similar web UI, not our lab). You do not need [Git](https://git-scm.com/) installed locally: we practice on [GitHub](https://github.com/), [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor), and [Learn Git Branching](https://learngitbranching.js.org/), with [GitHub Codespaces](https://github.com/features/codespaces) optional. You now have the vocabulary we will use for the rest of the book. Next, we will walk through History and Evolution of Git.
+
+## History and Evolution of Git
+
+[Git](https://git-scm.com/) did not start as a website. It started as a tool to keep the [Linux kernel](https://www.kernel.org/) moving when a previous tool went away. This chapter places [Git](https://git-scm.com/) on that timeline: centralized systems before it, why Linus Torvalds wrote it, why distributed was a design choice, and how [GitHub](https://github.com/) turned that engine into the social coding workflow we click today. You do not need to install anything. You do need this history so later chapters do not feel like magic buttons.
+
+Canonical history: [Pro Git: A Short History of Git](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git). Project overview: [Git about](https://git-scm.com/about). Docs: [Git documentation](https://git-scm.com/doc).
+
+### Before Git: Centralized Version Control
+
+Before [Git](https://git-scm.com/), most teams used a **centralized** version control system. One server held the history. You checked out a working copy, edited files, and sent a commit back to that server. If the server was down, you could still type. You could not record history, branch against the project, or see anyone else's latest commit.
+
+**How the centralized model worked:**
+
+1. **One repository on one server.** That copy was the source of truth.
+2. **Working copies were not full history.** You had files, plus enough metadata to talk to the server. You did not carry every commit with you.
+3. **The network was part of the workflow.** Update, commit, branch, and tag were server operations. [CVS](https://www.nongnu.org/cvs/) said this outright: the network between client and server must be up to check in or update.
+4. **Parallel work was possible but expensive.** Two people could edit at once. Merging and branching were the painful parts, especially on older tools.
+
+**Tools you will still hear named at work (we are not running them):**
+
+**[GNU RCS](https://www.gnu.org/software/rcs/)**
+
+- **Primary function:** file-level revision control. One file, many revisions, stored next to that file.
+- **Official site:** [GNU RCS](https://www.gnu.org/software/rcs/).
+- Fine for a single document. Not a team project model.
+
+**[CVS](https://www.nongnu.org/cvs/) (Concurrent Versions System)**
+
+- **Primary function:** multi-file projects on a central server, built on the same history format as [GNU RCS](https://www.gnu.org/software/rcs/).
+- **Official site:** [nongnu.org/cvs](https://www.nongnu.org/cvs/).
+- Unreserved checkouts let more than one person edit the same files. Commits were not reliably atomic across files. Branching was notoriously painful.
+
+**[Apache Subversion](https://subversion.apache.org/)**
+
+- **Primary function:** centralized successor to [CVS](https://www.nongnu.org/cvs/). Atomic commits, versioned directories, cheaper branches than [CVS](https://www.nongnu.org/cvs/).
+- **Official site:** [subversion.apache.org](https://subversion.apache.org/). Docs: [Subversion documentation](https://subversion.apache.org/docs/).
+- Still centralized: the server is the history. A common team path is "[Subversion](https://subversion.apache.org/) until we moved to [Git](https://git-scm.com/)." That is not the [Linux kernel](https://www.kernel.org/)'s path.
+
+**[Perforce P4](https://www.perforce.com/products/helix-core)**
+
+- **Primary function:** centralized version control still used for large, often binary-heavy trees. People at work may still say [Perforce](https://www.perforce.com/) or [Helix Core](https://www.perforce.com/products/helix-core).
+- **Official product:** [Perforce P4](https://www.perforce.com/products/helix-core) (the live product URL still uses the Helix Core path).
+- We name it so that product is not a mystery. We do not lab it.
+
+**What centralized got right:**
+
+- A single latest copy everyone could name.
+- Permissions on one server.
+- A model people understood: check out, edit, check in.
+
+**What it did not get right for a project like the [Linux kernel](https://www.kernel.org/):**
+
+- **Single point of failure.** Server loss or lockout paused the project's history.
+- **Offline work was a lie.** You could type. You could not commit.
+- **Branching at kernel scale.** Thousands of parallel lines of work. Centralized tools of the early 2000s were not built for that.
+- **Trust and access.** Kernel work is geographically distributed. Forcing every commit through one admin-owned server fights that.
+
+From 1991 to 2002, [Linux kernel](https://www.kernel.org/) changes often moved as patches and archive files, not as a shared version-control graph. In 2002 the project adopted [BitKeeper](https://www.bitkeeper.org/), a proprietary distributed SCM. That is the bridge to [Git](https://git-scm.com/). If your job used [Apache Subversion](https://subversion.apache.org/) last decade, you still learned centralized version control. The kernel learned distributed version control on [BitKeeper](https://www.bitkeeper.org/) first.
+
+**Working rule:** centralized version control is one server that owns history. [Git](https://git-scm.com/) is not that. When you later click around [GitHub](https://github.com/), it will *look* like one server. The data model underneath is still a distributed [Git](https://git-scm.com/) repository that the host stores for you.
+
+### Linus Torvalds and the Birth of [Git](https://git-scm.com/)
+
+[Git](https://git-scm.com/) exists because the [Linux kernel](https://www.kernel.org/) needed a version control system that was fast, distributed, and not someone else's license.
+
+In 2002 the kernel began using [BitKeeper](https://www.bitkeeper.org/). [BitKeeper](https://www.bitkeeper.org/) was (and is) a distributed SCM. At the time it was proprietary, with a free-of-charge arrangement for kernel work. Maintainers could exchange history without funneling every patch through one [CVS](https://www.nongnu.org/cvs/) server. [Pro Git: A Short History of Git](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git) records what happened next: in 2005 the relationship between the kernel community and the company behind [BitKeeper](https://www.bitkeeper.org/) broke down, and the free-of-charge status was revoked.
+
+Linus Torvalds created [Git](https://git-scm.com/) as a replacement, using lessons from [BitKeeper](https://www.bitkeeper.org/) without cloning that product. The [GitHub Blog: Git turns 20](https://github.blog/open-source/git/git-turns-20-a-qa-with-linus-torvalds/) dates the first [Git](https://git-scm.com/) commit to **April 7, 2005**. Within days the tool was recording kernel history. The canonical goals, from [Pro Git](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git), were:
+
+- **Speed.** The [Linux kernel](https://www.kernel.org/) is a huge tree. Status, commit, and merge had to be fast on a laptop.
+- **Simple design.** A small set of objects and refs, not a heavyweight server product.
+- **Strong support for non-linear development.** Thousands of parallel branches, not a single trunk everyone locks.
+- **Fully distributed.** Every clone can hold the full history.
+- **Scale.** Handle a project the size of the [Linux kernel](https://www.kernel.org/) without collapsing on data size.
+
+**What that means for you (without a terminal yet):**
+
+- [Git](https://git-scm.com/) was built for a project that already had many maintainers and many branches. Cheap branches are not a later add-on. They are why the tool exists.
+- [Git](https://git-scm.com/) is **open source**. The project is released under the [GNU GPL version 2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html). Home: [git-scm.com](https://git-scm.com/). About: [Git about](https://git-scm.com/about). Docs: [Git documentation](https://git-scm.com/doc). Source is developed in [Git](https://git-scm.com/) itself; a common mirror is [git/git](https://github.com/git/git) on [GitHub](https://github.com/).
+- Torvalds started it. Junio Hamano took over as maintainer while the kernel went back to being the kernel. You do not need their biographies. You need the product: a distributed engine, not a website.
+- [BitKeeper](https://www.bitkeeper.org/) later became open source under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). That does not change [Git](https://git-scm.com/)'s origin. We mention [BitKeeper](https://www.bitkeeper.org/) so the 2005 story has a name and a URL. We do not run it.
+
+**What [Git](https://git-scm.com/) was not at birth:**
+
+- Not [GitHub](https://github.com/). [GitHub](https://github.com/) is 2008.
+- Not a required central server. You could (and still can) exchange [Git](https://git-scm.com/) history with patches, bundles, or a USB drive.
+- Not a social network. Issues, pull requests, and stars are host features we cover next.
+
+The kernel still uses [Git](https://git-scm.com/). Browse it at [git.kernel.org](https://git.kernel.org/). That is the same engine you will click on [GitHub](https://github.com/). Different host, same objects.
+
+### Distributed Version Control as a Design Choice
+
+Distributed is not a marketing word. It is the data model. In a centralized system the server *is* the repository. In [Git](https://git-scm.com/), **a clone is a repository**. It has the commits, the branches, and the tags. A host such as [GitHub](https://github.com/) is a convenient, always-on copy with a web UI—not the only place history can live.
+
+**What "fully distributed" bought the kernel, and what it buys you:**
+
+1. **No single copy of history.** If [GitHub](https://github.com/) is unavailable, another clone can still hold the graph. You still need a place to push when you want a shared default branch. You do not need that place in order for [Git](https://git-scm.com/) to *exist*.
+2. **Commit without the network.** On a laptop with local [Git](https://git-scm.com/), you commit offline and push later. In this book the host runs [Git](https://git-scm.com/) for you, so your "network" is the browser tab. The design is the same: history is recorded in the repository, then published.
+3. **Cheap branches.** A branch is a name pointing at a commit. Creating one does not copy the project on a central server. Branches and Merging is where we click this. The reason it is cheap is this chapter: non-linear development was a goal in 2005, not a later feature.
+4. **Review is a graph operation.** You send commits. The other person merges them. Pull requests on [GitHub](https://github.com/) are a host UI on top of that graph. The graph came first.
+
+**[Mercurial](https://www.mercurial-scm.org/)** is the other distributed system born in the same 2005 window, also as a [BitKeeper](https://www.bitkeeper.org/) alternative.
+
+- **Primary function:** distributed version control with a full local repository, like [Git](https://git-scm.com/).
+- **Official site:** [mercurial-scm.org](https://www.mercurial-scm.org/).
+- Same job, different tool. We are not running [Mercurial](https://www.mercurial-scm.org/). We name it so a "Mercurial repo" at work is not a second mystery. Many hosts that once offered both later standardized on [Git](https://git-scm.com/)—[Bitbucket](https://bitbucket.org/) is the example in the next section.
+
+Core Principles of Git unpacks the mechanics: snapshots rather than file diffs, the three areas, immutable commits, the directed acyclic graph (DAG), and hashes. For this chapter, keep one picture:
+
+- **Centralized:** the server has the database. You have a working copy.
+- **Distributed ([Git](https://git-scm.com/)):** you can have the database. A host is one more copy, with permissions and a UI.
+
+**Working rule:** when we say [Git](https://git-scm.com/) is distributed, we do not mean "there is no [GitHub](https://github.com/)." We mean history is not trapped on one server by design. Our classroom still uses one host so you can learn in the browser. That is a teaching choice, not a change to the data model.
+
+### [GitHub](https://github.com/) and the Social Coding Era
+
+[Git](https://git-scm.com/) shipped in 2005 as a command-line engine. Most people did not fall in love with that engine directly. They fell in love with a website that spoke [Git](https://git-scm.com/).
+
+**[GitHub](https://github.com/)** launched in **2008**. Product: [github.com](https://github.com/). About: [GitHub About](https://github.com/about). Docs: [GitHub Docs](https://docs.github.com/). It stores [Git](https://git-scm.com/) repositories and adds a web UI for the collaboration loop we will practice: files, commits, branches, **pull requests**, reviews, issues, and permissions. [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) is that loop as a documented workflow: branch, commit, open a pull request, review, merge.
+
+**What "social coding" added on top of [Git](https://git-scm.com/):**
+
+- **A URL for every repository.** Clone, browse, and discuss in a browser. You no longer had to email a patch and hope the maintainer applied it.
+- **Fork as a one-click copy.** A fork is a [Git](https://git-scm.com/) repository you own, copied from someone else's. Pull Requests, Forks, and Code Review is the chapter. The idea is older than [GitHub](https://github.com/); the button is the era.
+- **Pull requests as the review object.** Host feature, not a [Git](https://git-scm.com/) object type. The commits inside are still [Git](https://git-scm.com/).
+- **Issues and discussion next to the graph.** Collaboration, Access, and Other Git Hosts covers how far we use them. They are not version control. They sit on the same page as version control.
+- **Public work by default (with private repos as a product).** Open source moved from tarball sites to repositories you can fork. That is why a free [GitHub](https://github.com/) account is enough for our lab. Plans: [GitHub Pricing](https://github.com/pricing).
+
+In **2018**, [Microsoft](https://www.microsoft.com/) announced it would acquire [GitHub](https://github.com/) ([Microsoft to acquire GitHub](https://news.microsoft.com/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/)) and completed the acquisition later that year ([Microsoft completes GitHub acquisition](https://blogs.microsoft.com/blog/2018/10/26/microsoft-completes-github-acquisition/)). [GitHub](https://github.com/) remains the product we click. [Git](https://git-scm.com/) remains independent open-source software. Do not mix the owner of a host with the version control system.
+
+**Other hosts (mention only — not a lab):**
+
+The social-coding pattern is not unique to [GitHub](https://github.com/). Other products store [Git](https://git-scm.com/) repositories and add a similar web UI. We named them in Introduction to Git. We name them again so this era is not "there is only one website":
+
+- **[GitLab](https://gitlab.com/)** — [gitlab.com](https://gitlab.com/) (self-managed [GitLab](https://about.gitlab.com/) exists too). Merge requests map to [GitHub](https://github.com/) pull requests.
+- **[Bitbucket](https://bitbucket.org/)** — [bitbucket.org](https://bitbucket.org/). Started with [Mercurial](https://www.mercurial-scm.org/), later added [Git](https://git-scm.com/), then standardized on [Git](https://git-scm.com/) ([Sunsetting Mercurial support in Bitbucket](https://bitbucket.org/blog/sunsetting-mercurial-support-in-bitbucket)).
+- **[Codeberg](https://codeberg.org/)** — [codeberg.org](https://codeberg.org/). A public [Git](https://git-scm.com/) host with a forge-style UI.
+- **[Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos)** — [Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos) in [Azure DevOps](https://azure.microsoft.com/en-us/products/devops).
+
+Collaboration, Access, and Other Git Hosts repeats this as a one-line tour. Additional Resources and Reading Materials has Other Git Hosts. Neither is a second classroom.
+
+**Why this era is why our book stays in the browser:**
+
+The host runs [Git](https://git-scm.com/) and shows you the graph. The [GitHub](https://github.com/) [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files), [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor), and optional [GitHub Codespaces](https://github.com/features/codespaces) exist because social coding put the repository on a URL. [Learn Git Branching](https://learngitbranching.js.org/) is a sandbox for the graph; it is not a host. You still do not need a local `git` binary for the main path.
+
+**Working rule:** [Git](https://git-scm.com/) is the history engine (2005). [GitHub](https://github.com/) is the host where we practice (2008, and still). Other hosts speak the same [Git](https://git-scm.com/). We do not open them as a lab.
+
+### Summary: History and Evolution of Git
+
+We covered the timeline that produced the buttons you will click. Before [Git](https://git-scm.com/), centralized tools such as [GNU RCS](https://www.gnu.org/software/rcs/), [CVS](https://www.nongnu.org/cvs/), [Apache Subversion](https://subversion.apache.org/), and [Perforce P4](https://www.perforce.com/products/helix-core) kept history on one server. The [Linux kernel](https://www.kernel.org/) used patches, then [BitKeeper](https://www.bitkeeper.org/), then—when that free license went away in 2005—Linus Torvalds wrote [Git](https://git-scm.com/) for speed, cheap branches, and a fully distributed model ([Pro Git: A Short History of Git](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git)). Distributed means a clone can hold the full history; [Mercurial](https://www.mercurial-scm.org/) is the sibling tool from the same year. [GitHub](https://github.com/) (2008) added the social-coding web UI—pull requests, forks, issues—on top of [Git](https://git-scm.com/). [Microsoft](https://www.microsoft.com/) acquired [GitHub](https://github.com/) in 2018. [GitLab](https://gitlab.com/), [Bitbucket](https://bitbucket.org/), [Codeberg](https://codeberg.org/), and [Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos) are the same [Git](https://git-scm.com/), similar UI, not our lab. Next, we will walk through Core Principles of Git.
