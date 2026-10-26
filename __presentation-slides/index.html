@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Awesome Git Book & Course: Distributed Version Control (Git)</title>
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/serif.css">
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <style>
+    .fragment.blur { filter: blur(1rem); }
+    .fragment.blur.visible { filter: none; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-markdown>
+        <textarea data-template>
+# Welcome <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+## Introduction to Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### What is Git? <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### What is Git? <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A distributed version control system (DVCS) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Tracks changes to files over time <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A complete copy can hold the full history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Official home: [git-scm.com](https://git-scm.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Git documentation](https://git-scm.com/doc) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What is Git? <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* What changed? <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Who changed it? <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* When? <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Why? (if the commit message is useful) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What is Git? <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Software, not a website <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Command line, desktop app, or host web UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* This book uses the web UI first <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Buttons on [GitHub](https://github.com/) still create [Git](https://git-scm.com/) history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What is Git? <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Repository: the project plus its history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commit: a saved snapshot with a message <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Branch: a name for a line of work <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Host: stores repos and adds a web UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What is Git? <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Not [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* You can use [Git](https://git-scm.com/) without [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Not a backup product by itself <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Not a deploy button <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What Problem Version Control Solves <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### What Problem Version Control Solves <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Overwriting <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No latest copy (`final-v2`, `final-FINAL`) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No audit trail <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Fear of changing things <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Review is guesswork <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What Problem Version Control Solves <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Snapshots, not a pile of copies <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Parallel work on branches <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Attribution on commits <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Recovery with a record <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What Problem Version Control Solves <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Version control is the job <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/) is the tool we teach <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A shared drive is not version control <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Chat attachments move bytes, not history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Git vs GitHub vs Other Hosts <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Git vs GitHub vs Other Hosts <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [Git](https://git-scm.com/) — the version control system <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A host — stores repositories and adds a web UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Collaboration features on top of [Git](https://git-scm.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Git vs GitHub vs Other Hosts <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Stores repositories, commits, branches, and tags <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Official site: [git-scm.com](https://git-scm.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Git documentation](https://git-scm.com/doc) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Does not require [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Git vs GitHub vs Other Hosts <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Our host: [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [GitHub Docs](https://docs.github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Free accounts are enough for the main path <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The host runs [Git](https://git-scm.com/) for you in the browser <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Git vs GitHub vs Other Hosts <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Pull requests, reviews, checks, branch rules <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Host features, not extra [Git](https://git-scm.com/) object types <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow): branch, commit, pull request, review, merge <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Git vs GitHub vs Other Hosts <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [GitLab](https://gitlab.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Bitbucket](https://bitbucket.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Codeberg](https://codeberg.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Same [Git](https://git-scm.com/), similar web UI, not our lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Git vs GitHub vs Other Hosts <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [Git](https://git-scm.com/) = the version control system <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) = the host where you click <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Other hosts = same [Git](https://git-scm.com/), similar web UI, not our lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Why This Book Does Not Require Git Installed Locally <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Why This Book Does Not Require Git Installed Locally <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* The host already runs [Git](https://git-scm.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) is [Visual Studio Code](https://code.visualstudio.com/) in the browser <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Learn Git Branching](https://learngitbranching.js.org/) is a visual sandbox <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub Codespaces](https://github.com/features/codespaces) is optional, never required <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Local install is Additional Resources — skippable <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Why This Book Does Not Require Git Installed Locally <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Operating-system differences in how you install a command-line tool <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Credentials and SSH keys before a first commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A local clone that drifts from [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Why This Book Does Not Require Git Installed Locally <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* No force-push button in the basic web editor (Appendix A) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No `git restore` and no stash (Appendix G) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No [Git](https://git-scm.com/) aliases in the [GitHub](https://github.com/) web UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Why This Book Does Not Require Git Installed Locally <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Browser work is still [Git](https://git-scm.com/) through the host <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Terminal later: [Learn Git Branching](https://learngitbranching.js.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Optional: [GitHub Codespaces](https://github.com/features/codespaces) or Git on Your Own Machine <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Until then, do not install anything <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### How We Practice in the Browser <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### How We Practice in the Browser <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* This section is a map, not a lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) account starts in The Browser Lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* You do not need to click a repository yet <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### How We Practice in the Browser <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A web browser <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Later: a free [GitHub](https://github.com/) account <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No local [Git](https://git-scm.com/) binary <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No second-host classroom <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### How We Practice in the Browser <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [GitHub](https://github.com/) stores the real repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Files, commits, branches, pull requests <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Open: [github.com](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* One-file edits: the [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### How We Practice in the Browser <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor): [Visual Studio Code](https://code.visualstudio.com/) in the browser <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Multi-file edits without installing [Git](https://git-scm.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Press `.` on a repository, or change `github.com` to `github.dev` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Not [GitHub Codespaces](https://github.com/features/codespaces) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### How We Practice in the Browser <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Visual sandbox: [Learn Git Branching](https://learngitbranching.js.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commands look like the [Git](https://git-scm.com/) command line <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Does not push to [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Real commits go back to [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### How We Practice in the Browser <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [GitHub Codespaces](https://github.com/features/codespaces): a cloud machine with a terminal <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/) already installed <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Never required on the main path <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Skip unless a later chapter says so <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### How We Practice in the Browser <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Read the chapter <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Real history: [GitHub](https://github.com/) or [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* See the graph: [Learn Git Branching](https://learngitbranching.js.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Do not install local [Git](https://git-scm.com/) unless you choose Additional Resources <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Summary: Introduction to Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Summary: Introduction to Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [Git](https://git-scm.com/) is a distributed version control system <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Version control solves history, parallel work, review, recovery <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/) is not [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Other hosts are a mention, not a lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Practice: [GitHub](https://github.com/), [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor), [Learn Git Branching](https://learngitbranching.js.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Next: History and Evolution of Git <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+        </textarea>
+      </section>
+    </div>
+  </div>
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+</html>
