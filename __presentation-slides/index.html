@@ -281,6 +281,255 @@
 * Other hosts are a mention, not a lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
 * Practice: [GitHub](https://github.com/), [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor), [Learn Git Branching](https://learngitbranching.js.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
 * Next: History and Evolution of Git <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+## History and Evolution of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Before Git: Centralized Version Control <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Before Git: Centralized Version Control <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* One server held the history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* You checked out a working copy, not a full clone <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Update, commit, branch, and tag were server operations <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* If the server was down, you could type, not record history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Before Git: Centralized Version Control <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [GNU RCS](https://www.gnu.org/software/rcs/) — file-level revisions <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [CVS](https://www.nongnu.org/cvs/) — multi-file projects on a central server <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Apache Subversion](https://subversion.apache.org/) — atomic commits, still centralized <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Perforce P4](https://www.perforce.com/products/helix-core) — still used for large binary-heavy trees <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* We name these tools; we do not run them <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Before Git: Centralized Version Control <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A single latest copy everyone could name <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Permissions on one server <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Check out, edit, check in <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Before Git: Centralized Version Control <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Single point of failure <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Offline work was a lie: you could not commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Branching at [Linux kernel](https://www.kernel.org/) scale was the painful part <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Geographically distributed work vs one admin-owned server <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Before Git: Centralized Version Control <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [Linux kernel](https://www.kernel.org/) 1991–2002: patches and archive files <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* 2002: the kernel adopted [BitKeeper](https://www.bitkeeper.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [BitKeeper](https://www.bitkeeper.org/) was a proprietary distributed SCM <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* That is the bridge to [Git](https://git-scm.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Before Git: Centralized Version Control <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Centralized = one server owns history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/) is not that <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) will *look* like one server <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Underneath it is still a distributed [Git](https://git-scm.com/) repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Linus Torvalds and the Birth of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Linus Torvalds and the Birth of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* The [Linux kernel](https://www.kernel.org/) needed speed, distribution, and its own license <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* 2002: kernel work on [BitKeeper](https://www.bitkeeper.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Proprietary, with a free-of-charge arrangement for kernel work <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Maintainers exchanged history without one [CVS](https://www.nongnu.org/cvs/) server <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Linus Torvalds and the Birth of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* 2005: the [BitKeeper](https://www.bitkeeper.org/) relationship broke down <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The free-of-charge status was revoked <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Source: [Pro Git: A Short History of Git](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Linus Torvalds wrote [Git](https://git-scm.com/) as a replacement <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Linus Torvalds and the Birth of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Speed <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Simple design <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Strong support for non-linear development <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Fully distributed <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Scale to the [Linux kernel](https://www.kernel.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Linus Torvalds and the Birth of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* First [Git](https://git-scm.com/) commit: **April 7, 2005** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Source: [GitHub Blog: Git turns 20](https://github.blog/open-source/git/git-turns-20-a-qa-with-linus-torvalds/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Within days it was recording kernel history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Cheap branches are why the tool exists, not a later add-on <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Linus Torvalds and the Birth of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Open source under the [GNU GPL version 2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Home: [git-scm.com](https://git-scm.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* About: [Git about](https://git-scm.com/about) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Git documentation](https://git-scm.com/doc) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Mirror: [git/git](https://github.com/git/git) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Linus Torvalds and the Birth of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Not [GitHub](https://github.com/) — that is 2008 <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Not a required central server <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Not a social network <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Kernel history today: [git.kernel.org](https://git.kernel.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Distributed Version Control as a Design Choice <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Distributed Version Control as a Design Choice <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Centralized: the server *is* the repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/): a clone is a repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commits, branches, and tags travel with the clone <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) is a convenient copy with a web UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Distributed Version Control as a Design Choice <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* No single copy of history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commit without the network (local [Git](https://git-scm.com/)); we use the host in the browser <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Cheap branches: a name pointing at a commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Review is a graph operation; pull requests are host UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Distributed Version Control as a Design Choice <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [Mercurial](https://www.mercurial-scm.org/) — the sibling DVCS from 2005 <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Also a [BitKeeper](https://www.bitkeeper.org/) alternative <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Official site: [mercurial-scm.org](https://www.mercurial-scm.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Same job, different tool; we do not run it <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Distributed Version Control as a Design Choice <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Centralized: the server has the database; you have a working copy <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Distributed ([Git](https://git-scm.com/)): you can have the database <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A host is one more copy, with permissions and a UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Mechanics next: Core Principles of Git <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Distributed Version Control as a Design Choice <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Distributed does not mean "there is no [GitHub](https://github.com/)" <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* History is not trapped on one server by design <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Our classroom still uses one host so you can learn in the browser <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* That is a teaching choice, not a change to the data model <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### GitHub and the Social Coding Era <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### GitHub and the Social Coding Era <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [Git](https://git-scm.com/) shipped in 2005 as a command-line engine <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) launched in **2008** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Product: [github.com](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [GitHub Docs](https://docs.github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow): branch, commit, pull request, review, merge <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### GitHub and the Social Coding Era <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A URL for every repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Fork as a one-click copy <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Pull requests as the review object (host feature, not a [Git](https://git-scm.com/) object type) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Issues next to the graph <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Public work by default; free accounts are enough for our lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### GitHub and the Social Coding Era <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* 2018: [Microsoft](https://www.microsoft.com/) acquired [GitHub](https://github.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Announced: [Microsoft to acquire GitHub](https://news.microsoft.com/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Completed: [Microsoft completes GitHub acquisition](https://blogs.microsoft.com/blog/2018/10/26/microsoft-completes-github-acquisition/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) is still the host we click <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/) remains independent open-source software <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### GitHub and the Social Coding Era <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [GitLab](https://gitlab.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Bitbucket](https://bitbucket.org/) (started with [Mercurial](https://www.mercurial-scm.org/), later [Git](https://git-scm.com/) only) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Codeberg](https://codeberg.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Same [Git](https://git-scm.com/), similar web UI, not our lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### GitHub and the Social Coding Era <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* The host runs [Git](https://git-scm.com/) and shows you the graph <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Optional: [GitHub Codespaces](https://github.com/features/codespaces) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Graph sandbox: [Learn Git Branching](https://learngitbranching.js.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### GitHub and the Social Coding Era <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [Git](https://git-scm.com/) = the history engine (2005) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) = the host where we practice (2008, and still) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Other hosts speak the same [Git](https://git-scm.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* We do not open them as a lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Summary: History and Evolution of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Summary: History and Evolution of Git <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Centralized tools kept history on one server <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* 2005: Torvalds wrote [Git](https://git-scm.com/) after [BitKeeper](https://www.bitkeeper.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Distributed means a clone can hold the full history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) (2008) added the social-coding web UI <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Other hosts are a mention, not a lab <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Next: Core Principles of Git <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
         </textarea>
       </section>
     </div>
