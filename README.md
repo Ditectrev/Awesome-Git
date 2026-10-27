@@ -779,3 +779,227 @@ Other hosts — [GitLab](https://gitlab.com/), [Bitbucket](https://bitbucket.org
 ### Summary: Core Principles of Git
 
 We covered the model under the buttons. [Git](https://git-scm.com/) stores **snapshots**, not a list of file diffs; [GitHub](https://github.com/) still *shows* diffs so you can review ([Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)). Work moves through **three areas** — working tree, staging area (index), repository — even when the [GitHub](https://github.com/) [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) stages and commits in one click; [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) is where you will see Changes vs Staged. **Commits are immutable**: new work is a new snapshot with a parent, an author, and a message; revert adds a commit; rewriting is Appendix A. Those commits form a **DAG** (directed, acyclic). A branch is a name on that graph; [Learn Git Branching](https://learngitbranching.js.org/) and the [GitHub](https://github.com/) [Network graph](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories) are how you *see* it later. **Hashes** are identity: [SHA-1](https://csrc.nist.gov/projects/hash-functions) (40 hex characters) on the [GitHub](https://github.com/) main path, with [SHA-256](https://csrc.nist.gov/projects/hash-functions) documented as the successor ([hash function transition](https://git-scm.com/docs/hash-function-transition)). **Distributed** in daily work means each complete copy holds the graph; we commit on [GitHub](https://github.com/), forks are copies, and other hosts speak the same [Git](https://git-scm.com/). Next, we will walk through The Browser Lab.
+
+## The Browser Lab
+
+This is the first click-through chapter. Introduction to Git mapped the classroom. History and Evolution of Git and Core Principles of Git gave you the model. Now you set up the room you will actually click in.
+
+**What you need:** a web browser and a free [GitHub](https://github.com/) account. That is the whole main path.
+
+**What you do not need:** a local `git` binary, [GitHub Desktop](https://desktop.github.com/), a paid [GitHub](https://github.com/) plan, [GitHub Codespaces](https://github.com/features/codespaces), or an account on [GitLab](https://gitlab.com/), [Bitbucket](https://bitbucket.org/), [Codeberg](https://codeberg.org/), or [Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos). [GitHub](https://github.com/)'s own [Getting started with your GitHub account](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account) includes "Setting up Git" on your computer. Skip that. We are not installing [Git](https://git-scm.com/) until Additional Resources (Git on Your Own Machine).
+
+**What you do in this chapter:** create (or confirm) the account, walk the [GitHub](https://github.com/) UI, open [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) on a public repository you do not have to own, and open [Learn Git Branching](https://learngitbranching.js.org/) so the graph is not an abstract drawing. **What you do not do yet:** create a repository, make a commit, or start a codespace. Repositories, Files, and Commits is the next chapter.
+
+Canonical host docs: [GitHub Docs](https://docs.github.com/), [Creating an account on GitHub](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github), [Using VS Code for the Web from GitHub](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor), [GitHub Codespaces](https://docs.github.com/en/codespaces). Sandbox: [Learn Git Branching](https://learngitbranching.js.org/).
+
+### Creating a [GitHub](https://github.com/) Account
+
+Every person on [GitHub](https://github.com/) signs in to a **personal account**. That account is your identity: a username, a profile, and the actor behind every click. Docs: [Creating an account on GitHub](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github), [Types of GitHub accounts](https://docs.github.com/en/get-started/learning-about-github/types-of-github-accounts). If you already have a personal account you can sign in to, use it. Do not create a second one "for the book."
+
+**Do this:**
+
+1. Open [github.com/signup](https://github.com/signup) (or [github.com](https://github.com/) and follow the sign-up prompts). You can also continue with [Google](https://www.google.com/) or [Apple](https://www.apple.com/) as social login ([Creating an account on GitHub](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)).
+2. Choose a **username** you can live with. It becomes part of every repository URL (`github.com/username/…`). You can [change your GitHub username](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-user-account-settings/changing-your-github-username) later; old links break. Pick once if you can.
+3. Use a password you do not reuse elsewhere ([Creating a strong password](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-strong-password)).
+4. **Verify your email.** Without a verified address you cannot finish basic tasks such as creating a repository ([Verifying your email address](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/verifying-your-email-address)). Do that now, even though we do not create a repository until the next chapter.
+5. Stay on **[GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products)** for a personal account. Plans: [GitHub Pricing](https://github.com/pricing), [GitHub's plans](https://docs.github.com/en/get-started/learning-about-github/githubs-products). Free includes unlimited public and private repositories. You do not need [GitHub Pro](https://docs.github.com/en/get-started/learning-about-github/githubs-products#github-pro) for this book.
+6. Turn on **two-factor authentication (2FA)**. [GitHub](https://github.com/) strongly recommends it; we do too. Docs: [Configuring two-factor authentication](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication), [About two-factor authentication](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/about-two-factor-authentication). Passkeys are optional ([Managing your passkeys](https://docs.github.com/en/authentication/authenticating-with-a-passkey/managing-your-passkeys)).
+
+**If your workplace already gave you a [GitHub](https://github.com/) account:** [Enterprise Managed Users](https://docs.github.com/en/enterprise-cloud@latest/admin/identity-and-access-management/understanding-iam-for-enterprises/about-enterprise-managed-users) cannot create public content or contribute outside that enterprise. For this course you want a personal account you control. Use your existing personal account, or create one with a personal email, if the managed account cannot do public work.
+
+**What "signed in" unlocks for the rest of this chapter:**
+
+- The [GitHub](https://github.com/) dashboard, settings, and notifications.
+- [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) ([Using VS Code for the Web from GitHub](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) requires you to be signed in).
+- Later: creating a repository, committing, opening a pull request.
+
+[Learn Git Branching](https://learngitbranching.js.org/) does not need this account. [GitHub Codespaces](https://github.com/features/codespaces) does, and we still skip it on the main path.
+
+**Working rule:** one personal [GitHub](https://github.com/) account on [GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products), email verified, 2FA on. No local [Git](https://git-scm.com/). No paid upgrade.
+
+### Navigating the [GitHub](https://github.com/) Interface
+
+You are signed in. Walk the product so later chapters can say "open the Commits page" without drawing a map each time. Product: [github.com](https://github.com/). Docs: [GitHub Docs](https://docs.github.com/), [Getting started with your GitHub account](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account), [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow). Do not click **New repository** yet.
+
+**The global chrome (every page):**
+
+- **Logo / Home** — the dashboard: repositories you have used, activity, and the search bar.
+- **Search** — repositories, users, issues, and code. Docs: [About searching on GitHub](https://docs.github.com/en/search-github/getting-started-with-searching-on-github/about-searching-on-github).
+- **+** — create a repository, import, gist, organization. The repository item is the next chapter. Leave it.
+- **Notifications** — activity you are subscribed to ([About notifications](https://docs.github.com/en/subscriptions-and-notifications/concepts/about-notifications)).
+- **Avatar** — **Your profile**, **Your repositories**, **Settings**. Profile docs: [About your profile](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/about-your-profile).
+
+**Your profile and settings (you, not a project):**
+
+Open your avatar → **Your profile**. That page is your public identity: repositories, pinned work, contribution graph. Then avatar → **Settings** for email, 2FA, and account admin. You will come back here when a later chapter talks about permissions, not to install [Git](https://git-scm.com/).
+
+**A repository page (look; do not create):**
+
+Open any public repository you can read. This book is one: [Ditectrev/Awesome-Git-Book-Course-Distributed-Version-Control](https://github.com/Ditectrev/Awesome-Git-Book-Course-Distributed-Version-Control). Repository docs: [About repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories).
+
+On the **Code** tab you will keep using:
+
+- **File tree** — the working tree as [GitHub](https://github.com/) shows it. Click a file to read it; the pencil is the [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) we use in the next chapter.
+- **README** — the file rendered under the tree. Many repositories use it as the front page.
+- **Branch dropdown** — the current line of work (often `main`). Branches and Merging is the chapter.
+- **Commits** / history link — the graph flattened into a list. Core Principles named this; we click it on purpose in Repositories, Files, and Commits.
+- **Code** button — clone URLs, [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor), and [GitHub Codespaces](https://github.com/features/codespaces). We open [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) in a later section of *this* chapter. We do not create a codespace. We do not clone to disk.
+
+**Other tabs on a repository (names, not a tour of every product):**
+
+- **Pull requests** — host review objects. Pull Requests, Forks, and Code Review.
+- **Issues**, **Discussions**, **Projects** — conversation around the graph. Collaboration, Access, and Other Git Hosts.
+- **Insights** — includes the [Network graph](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories). Branches and Merging.
+- **Settings** — visibility, collaborators, rulesets. You only have this on repositories you admin.
+- **Actions**, **Security**, **Wiki**, **Packages** — real [GitHub](https://github.com/) products. This is a [Git](https://git-scm.com/) book. We touch Actions later only as merge gates (Appendix F). Do not set them up now.
+
+**Working rule:** learn where files, commits, branches, pull requests, and settings live. The next chapter starts creating history. This chapter only walks the map.
+
+### Personal vs Organization Repositories
+
+A repository is owned by **someone**. On [GitHub](https://github.com/) that someone is either your personal account or an **organization**. Docs: [Types of GitHub accounts](https://docs.github.com/en/get-started/learning-about-github/types-of-github-accounts), [About organizations](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations), [About repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories).
+
+**Personal account repositories**
+
+- **Primary function:** a [Git](https://git-scm.com/) repository *you* own. Your username is in the URL.
+- You are the owner. You can add **collaborators**. Permissions: [Permission levels for a personal account repository](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-user-account-settings/permission-levels-for-a-personal-account-repository).
+- This is the owner we use for the rest of the main path.
+
+**Organization repositories**
+
+- **Primary function:** a shared account that owns repositories, teams, and settings. You **cannot sign in** as the organization. You sign in as yourself; actions are attributed to your personal account ([About organizations](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations)).
+- Roles: owner, member, and more ([Roles in an organization](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization)). Teams group members ([About organization teams](https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams)).
+- You can create an organization on [GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products) ([Creating a new organization from scratch](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/creating-a-new-organization-from-scratch)). **Do not create one for this book.** Collaboration, Access, and Other Git Hosts is where we talk teams and permissions. Paid org plans ([GitHub Team](https://docs.github.com/en/get-started/learning-about-github/githubs-products#github-team), [GitHub Enterprise Cloud](https://docs.github.com/en/get-started/learning-about-github/githubs-products#github-enterprise)) are not required.
+
+**Enterprise accounts** sit above organizations on [GitHub Enterprise Cloud](https://github.com/enterprise). They are how companies manage many orgs. You do not need one. If your day job already put you in an org, that is fine — still do the exercises under your **personal** account so the URL is yours.
+
+**Working rule:** you always sign in as a person. An organization is a container, not a login. Our lab repositories will live on your personal account.
+
+### Public, Private, and Internal Visibility
+
+Visibility is who is allowed to *see* the repository. It is not a [Git](https://git-scm.com/) object type. You will choose it when you create a repository in the next chapter. Learn the three words now so the form is not a surprise. Docs: [About repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories) (About repository visibility), [Setting repository visibility](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility).
+
+**Public**
+
+- **Who sees it:** anyone on the internet, signed in or not.
+- **Who can push:** people with write access, not "the internet."
+- Fine for this course. Fine for open source. Not fine for secrets, private keys, or production `.env` files. Secrets That Must Never Be Committed is later; the rule starts here: **do not put secrets in a repository**, public or private.
+
+**Private**
+
+- **Who sees it:** you, people you explicitly share with, and (for org repos) certain organization members.
+- [GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products) includes **unlimited private repositories** on a personal account, with a limited feature set on those private repos. You do not need to pay to hide a practice repo.
+- Private is still on [GitHub](https://github.com/)'s servers. It is access control, not encryption at rest you uniquely hold.
+
+**Internal**
+
+- **Who sees it:** every member of a [GitHub Enterprise Cloud](https://github.com/enterprise) **enterprise**, across that enterprise's organizations. Docs: [About internal repositories](https://docs.github.com/en/enterprise-cloud@latest/repositories/creating-and-managing-repositories/about-repositories#about-internal-repositories).
+- **You will not see this option** on a personal [GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products) account. It exists so we can name the word when a workplace repo is "internal" rather than public or private.
+- Not a lab. Not a reason to start an enterprise trial.
+
+When you later change visibility, read [Setting repository visibility](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility) first — public ↔ private has side effects on forks and some features. We will not flip visibility for fun.
+
+**Working rule:** public means the internet can read it. Private means only people you allow. Internal is an enterprise-only third option you can ignore on the main path. Next chapter you pick public or private; either works for practice.
+
+### [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor): [VS Code](https://code.visualstudio.com/) in the Browser
+
+[github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) is [Visual Studio Code](https://code.visualstudio.com/) running in the browser against a [GitHub](https://github.com/) repository. Microsoft's name for the editor is [VS Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web). [GitHub](https://github.com/)'s how-to is [Using VS Code for the Web from GitHub](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor). It is **free**. It is **not** [GitHub Codespaces](https://github.com/features/codespaces). There is no cloud VM and **no terminal**.
+
+You must be signed in. You do not install [Git](https://git-scm.com/). You do not need a repository of your own yet: you can open any public repository, fork, or pull request.
+
+**Open it (pick one):**
+
+1. On a [GitHub](https://github.com/) repository or pull request, press `.` (period) for the same tab, or `>` for a new tab.
+2. In the address bar, change `github.com` to `github.dev`.
+3. When viewing a file, use the edit dropdown and choose [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor).
+
+**Do this now:** open [Ditectrev/Awesome-Git-Book-Course-Distributed-Version-Control](https://github.com/Ditectrev/Awesome-Git-Book-Course-Distributed-Version-Control) (or any public repository) and press `.`. You should see the [VS Code](https://code.visualstudio.com/) file tree, editor, and Activity Bar. Click around. **Do not commit.** You do not own this repository; the next chapter is when you commit to one you create.
+
+**What the editor is doing:**
+
+- It runs in the browser sandbox. It does **not** clone the repository to your disk. Most [Git](https://git-scm.com/) operations go through the **[GitHub Repositories](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub)** extension ([VS Code: GitHub Repositories](https://code.visualstudio.com/docs/sourcecontrol/github)).
+- Uncommitted edits live in **browser local storage** until you commit. Close the tab and they can vanish. Commit regularly once you are on a repository you own ([Using VS Code for the Web from GitHub](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor)).
+- **Source Control** (Activity Bar) is the three areas from Core Principles: **Changes** vs **Staged Changes**, then a commit. Docs: [VS Code Source Control](https://code.visualstudio.com/docs/sourcecontrol/overview). On [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) commit is typically **Commit & Push** to the [GitHub](https://github.com/) branch — there is no separate laptop copy.
+- You can switch branches without a stash. [GitHub](https://github.com/) has no stash button; stash is Appendix G.
+
+**Related URL, same editor family:** [vscode.dev](https://vscode.dev/) is [VS Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web) without starting from a [github.com](https://github.com/) page. `https://vscode.dev/github/OWNER/REPO` opens the same kind of session. We still say [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) in this book because that is the [GitHub](https://github.com/) shortcut.
+
+**What it cannot do (so we do not pretend):**
+
+- No integrated terminal, no `git` binary, no build/run of an app. That is [GitHub Codespaces](https://github.com/features/codespaces) or Git on Your Own Machine.
+- Only **web extensions** install (next subsection).
+- The basic [GitHub](https://github.com/) [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) is still the right tool for a one-file change. Use [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) when you want search, many files, or the Source Control view.
+
+**Working rule:** `.` on a [GitHub](https://github.com/) repo opens [VS Code](https://code.visualstudio.com/) in the browser. Free. No VM. No local [Git](https://git-scm.com/). Commit only to repositories you own — starting in the next chapter.
+
+#### Extensions That Work in [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor)
+
+[VS Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web) only runs **web extensions**: extensions built to run in the browser sandbox, not on Node.js. Docs: [Web extensions](https://code.visualstudio.com/api/extension-guides/web-extensions), [Using VS Code for the Web from GitHub](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) (Using extensions). In the Extensions view, what you can install is already the compatible subset. [Settings Sync](https://code.visualstudio.com/docs/configure/settings-sync) can bring compatible extensions along if you use it; it is optional.
+
+You do not need extensions to finish this book. Install these two if you want more [Git](https://git-scm.com/) context without a local binary. Additional Resources (`Recommended Tools and Software for Git`) is the longer list.
+
+**[GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)**
+
+- **Primary function:** review and manage [GitHub](https://github.com/) pull requests and issues inside [VS Code](https://code.visualstudio.com/).
+- **Marketplace:** [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github) (publisher: [GitHub](https://github.com/)).
+- **Why it belongs here:** it talks to the [GitHub](https://github.com/) API from the editor. You do not need `git` on disk. We use pull requests as a workflow in Pull Requests, Forks, and Code Review; the extension is optional chrome on top.
+
+**[GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)** (web)
+
+- **Primary function:** blame, file history, and related [Git](https://git-scm.com/) annotations in the editor. Product: [GitLens](https://www.gitkraken.com/gitlens) by [GitKraken](https://www.gitkraken.com/).
+- **Marketplace:** [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens).
+- **Why it belongs here:** [GitLens](https://www.gitkraken.com/gitlens) runs on [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) and [vscode.dev](https://vscode.dev/) as a web extension, using [GitHub](https://github.com/) as the source instead of a local clone. Inline blame and history work without installing [Git](https://git-scm.com/).
+- **What "web" does not mean:** every [GitLens](https://www.gitkraken.com/gitlens) desktop feature. Full local [GitLens](https://www.gitkraken.com/gitlens) (and paid [GitLens](https://www.gitkraken.com/gitlens) graphs on private repos) wants Git from Additional Resources or a codespace. Community features on public repos are enough for browsing.
+
+**[Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph) is not this lab.**
+
+- **Marketplace:** [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph).
+- It draws a commit graph from a real [Git](https://git-scm.com/) repository on disk (or in a VM that has [Git](https://git-scm.com/)). [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) has no `git` binary. Install it later under Additional Resources, or in optional [GitHub Codespaces](https://github.com/features/codespaces). To *see* a graph in the browser without Git, use [Learn Git Branching](https://learngitbranching.js.org/) and the [GitHub](https://github.com/) [Network graph](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories).
+
+Chrome extensions that restyle [github.com](https://github.com/) — [Refined GitHub](https://github.com/refined-github/refined-github), [Octotree](https://www.octotree.io/) — live under Additional Resources too. They are not [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) extensions. [Chrome DevTools](https://developer.chrome.com/docs/devtools) has no Git panel; do not look for one.
+
+**Working rule:** in [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor), [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github) and [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) (web) are the extensions that work without local [Git](https://git-scm.com/). [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph) waits for a machine that has Git.
+
+### [Learn Git Branching](https://learngitbranching.js.org/) as a Visual Sandbox
+
+[Learn Git Branching](https://learngitbranching.js.org/) is a browser sandbox that draws the commit DAG while you type commands that *look like* the [Git](https://git-scm.com/) command line. Open: [learngitbranching.js.org](https://learngitbranching.js.org/). Source: [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching) on [GitHub](https://github.com/). It does **not** install [Git](https://git-scm.com/) on your computer. It does **not** push to [GitHub](https://github.com/). It does **not** need a [GitHub](https://github.com/) account.
+
+**Primary function:** let you *see* parents, branches, and merges — the graph Core Principles described — without touching a real repository.
+
+**Do this now:**
+
+1. Open [learngitbranching.js.org](https://learngitbranching.js.org/).
+2. Complete **Introduction to Git Commits** in the Introduction Sequence so you watch commits appear on the graph.
+3. Stop there unless you want to peek at branching. We will send you back on purpose in Branches and Merging (`Visual Practice in Learn Git Branching`) and in Appendix A (`Visual Rebase in Learn Git Branching`).
+
+The commands (`git commit`, `git branch`, later `git merge` / `git rebase`) are the sandbox's language. Typing them here is not "installing Git" and it is not a [GitHub](https://github.com/) workflow. When we want a real snapshot on a host, we go back to [GitHub](https://github.com/) or [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor).
+
+**Working rule:** [Learn Git Branching](https://learngitbranching.js.org/) is a toy repository for your eyes. [GitHub](https://github.com/) is the real repository. Use the sandbox when the lesson is the shape of the graph.
+
+### [GitHub Codespaces](https://github.com/features/codespaces) as an Optional Cloud Machine
+
+A **codespace** is a cloud virtual machine in the browser with a terminal and [Git](https://git-scm.com/) already installed. Product: [GitHub Codespaces](https://github.com/features/codespaces). Docs: [GitHub Codespaces](https://docs.github.com/en/codespaces), [Creating a codespace for a repository](https://docs.github.com/en/codespaces/developing-in-a-codespace/creating-a-codespace-for-a-repository). Billing: [GitHub Codespaces billing](https://docs.github.com/en/billing/concepts/product-billing/github-codespaces).
+
+**It is optional. It is never required for the main path.** Do not create a codespace in this chapter. You can finish the book without one.
+
+**Why we name it anyway:** later appendixes (interactive rebase, reflog, stash, `git restore`) need a real `git` binary. The three ways to get that are [Learn Git Branching](https://learngitbranching.js.org/) (graph only), [GitHub Codespaces](https://github.com/features/codespaces), or Git on Your Own Machine. If you refuse a local install, a codespace is the escape hatch — not the classroom default.
+
+**[github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) vs [GitHub Codespaces](https://github.com/features/codespaces)** ([Using VS Code for the Web from GitHub](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor)):
+
+| | [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) / [VS Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web) | [GitHub Codespaces](https://github.com/features/codespaces) |
+| --- | --- | --- |
+| Cost | Free | Free monthly quota on personal accounts; then billed |
+| Startup | Instant (press `.`) | Minutes (VM + container) |
+| Terminal / `git` | None | Yes |
+| Compute | None | A dedicated VM |
+| Extensions | Web extensions only | Most of the [Visual Studio Marketplace](https://marketplace.visualstudio.com/) |
+
+**Quota if you ever opt in:** [GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products) for personal accounts includes **120** Codespaces core hours and **15 GB-month** of storage per month ([GitHub's plans](https://docs.github.com/en/get-started/learning-about-github/githubs-products), [GitHub Codespaces billing](https://docs.github.com/en/billing/concepts/product-billing/github-codespaces)). Stop the codespace when you are done so idle storage does not eat the quota. Organization and enterprise plans do not add a free Codespaces quota the same way; owners can pay for members.
+
+**How you would open one (later, if a chapter says you need a terminal):** on a repository, **Code** → **Codespaces** → create ([Creating a codespace for a repository](https://docs.github.com/en/codespaces/developing-in-a-codespace/creating-a-codespace-for-a-repository)). You still do not need that button today.
+
+**Working rule:** [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) is the browser editor. [GitHub Codespaces](https://github.com/features/codespaces) is an optional cloud laptop. Skip the laptop unless a later chapter asks for a real `git` binary and you do not want Additional Resources.
+
+### Summary: The Browser Lab
+
+We set up the classroom. You created or confirmed a personal [GitHub](https://github.com/) account on [GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products) ([Creating an account on GitHub](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)), verified email, and turned on 2FA — with no local [Git](https://git-scm.com/) and no paid plan. You walked the [GitHub](https://github.com/) UI (dashboard, profile, a public repository's Code tab) without creating a repo. Personal repositories belong to you; organizations are shared containers you do not sign in as ([About organizations](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations)). Visibility is public, private, or (enterprise-only) internal ([About repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories)). [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) is [VS Code](https://code.visualstudio.com/) in the browser (press `.`); [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github) and [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) (web) run there without a `git` binary, while [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph) does not. [Learn Git Branching](https://learngitbranching.js.org/) is the visual sandbox for the DAG. [GitHub Codespaces](https://github.com/features/codespaces) is an optional cloud machine with a terminal — never required. Next, we will walk through Repositories, Files, and Commits.
