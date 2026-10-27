@@ -600,3 +600,182 @@ The host runs [Git](https://git-scm.com/) and shows you the graph. The [GitHub](
 ### Summary: History and Evolution of Git
 
 We covered the timeline that produced the buttons you will click. Before [Git](https://git-scm.com/), centralized tools such as [GNU RCS](https://www.gnu.org/software/rcs/), [CVS](https://www.nongnu.org/cvs/), [Apache Subversion](https://subversion.apache.org/), and [Perforce P4](https://www.perforce.com/products/helix-core) kept history on one server. The [Linux kernel](https://www.kernel.org/) used patches, then [BitKeeper](https://www.bitkeeper.org/), then—when that free license went away in 2005—Linus Torvalds wrote [Git](https://git-scm.com/) for speed, cheap branches, and a fully distributed model ([Pro Git: A Short History of Git](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git)). Distributed means a clone can hold the full history; [Mercurial](https://www.mercurial-scm.org/) is the sibling tool from the same year. [GitHub](https://github.com/) (2008) added the social-coding web UI—pull requests, forks, issues—on top of [Git](https://git-scm.com/). [Microsoft](https://www.microsoft.com/) acquired [GitHub](https://github.com/) in 2018. [GitLab](https://gitlab.com/), [Bitbucket](https://bitbucket.org/), [Codeberg](https://codeberg.org/), and [Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos) are the same [Git](https://git-scm.com/), similar UI, not our lab. Next, we will walk through Core Principles of Git.
+
+## Core Principles of Git
+
+History and Evolution of Git explained *why* [Git](https://git-scm.com/) looks the way it does. This chapter is the mental model you will reuse for every later click: how [Git](https://git-scm.com/) stores data, where a change sits before it is history, why a commit is a name you cannot silently edit, how those names form a graph, and what "distributed" means when the classroom is a browser.
+
+You still do not install a local `git` binary. You still do not create a repository yet. Canonical mechanics: [Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F). Host view: [GitHub Docs: About Git](https://docs.github.com/en/get-started/using-git/about-git). When you want to *see* a graph instead of reading one, bookmark [Learn Git Branching](https://learngitbranching.js.org/) — a sandbox, not this chapter's lab. When you want to *see* a real commit, [GitHub](https://github.com/) already shows one; we open that UI on purpose in Repositories, Files, and Commits.
+
+### Snapshots, Not File Diffs
+
+Most older version control systems think in **deltas**: a base file plus a list of line changes over time. [Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F) names that model in [CVS](https://www.nongnu.org/cvs/), [Apache Subversion](https://subversion.apache.org/), and [Perforce P4](https://www.perforce.com/products/helix-core). [Git](https://git-scm.com/) does not store history that way.
+
+**[Git](https://git-scm.com/) stores snapshots.** Each commit is a picture of the tracked project at that moment: every file that belongs in that version, as it looked then. To stay efficient, unchanged files are not copied again. [Git](https://git-scm.com/) stores a link to the same content it already has (a *blob* — the object that holds file bytes). Changed files get a new blob. The commit points at a *tree* (the directory listing) that names which blob belongs at which path. [Pro Git: Git Objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) is the internals write-up; Appendix C is where we go deeper. For this chapter, keep the picture: **a commit is a whole-tree snapshot, not a patch file.**
+
+**Why [GitHub](https://github.com/) still shows a diff:**
+
+- Humans review changes, not entire files. A host *computes* a diff between two snapshots so you can read what moved.
+- The [GitHub](https://github.com/) commit page, pull-request Files changed tab, and [comparing commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/viewing-and-comparing-commits/comparing-commits) view are that computed view. They are not proof that [Git](https://git-scm.com/) stored a list of diffs. The [Git data model](https://git-scm.com/docs/gitdatamodel) is explicit: [Git](https://git-scm.com/) does not store the diff for a commit; it calculates one when you ask.
+- [Differences between commit views](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/viewing-and-comparing-commits/comparing-commits#differences-between-commit-views) on [GitHub](https://github.com/) also matter later: the repository Commits page is the graph; a single file's History can omit commits that did not affect that file.
+
+**What this buys you:**
+
+1. **Every commit is a complete project.** Checking out a commit (later, on a branch) means "this tree," not "replay ten years of patches in order."
+2. **Unchanged files are cheap.** Two commits that share a README share one blob. History does not grow a new copy of every file on every save.
+3. **Branches are cheap.** A branch is a name for a snapshot (a commit), not a duplicated project on a server. Branches and Merging is the click-through. The reason it is cheap starts here.
+
+**Working rule:** think **snapshots**. Read **diffs**. [Git](https://git-scm.com/) stores the former. [GitHub](https://github.com/) displays the latter so you can review.
+
+### The Three Areas: Working Tree, Staging Area, and Repository
+
+[Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F) calls this "the main thing to remember." Files in [Git](https://git-scm.com/) sit in one of three states — **modified**, **staged**, or **committed** — which map to three areas of a project. The [Git data model](https://git-scm.com/docs/gitdatamodel) names the middle area the **index**. People also say **staging area**. Same thing.
+
+**Working tree**
+
+- **Primary function:** the files you edit. A checkout of one snapshot, unpacked so you can read and change them.
+- On [GitHub](https://github.com/) this is the file browser and the [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files). In [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) it is the editor tabs ([Visual Studio Code](https://code.visualstudio.com/) for the Web: [VS Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web)).
+- Unsaved editor text is not history. Closing the tab without committing leaves the repository as it was.
+
+**Staging area (index)**
+
+- **Primary function:** the list of paths and blobs that the *next* commit will contain. You choose what belongs in the next snapshot instead of dumping every dirty file into history.
+- Technical name: **index**. Docs: [Git data model](https://git-scm.com/docs/gitdatamodel). On a machine with [Git](https://git-scm.com/), `git add` updates it and `git status` compares working tree, index, and last commit. We do not run those commands on the main path.
+- **[github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor)** is the browser place you will *see* this split: the Source Control view in [Visual Studio Code](https://code.visualstudio.com/) lists **Changes** vs **Staged Changes** ([VS Code Source Control](https://code.visualstudio.com/docs/sourcecontrol/overview)). That is the index, drawn as two lists.
+- The basic [GitHub](https://github.com/) [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) hides the index: **Commit changes** stages and commits in one step. The three areas still exist. The host just does the middle step for you.
+
+**Repository (Git directory)**
+
+- **Primary function:** the object database — blobs, trees, commits, tags — plus the names (refs) that point at commits. This is what a clone copies. [Pro Git: Git Objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) and [Git data model](https://git-scm.com/docs/gitdatamodel).
+- On [GitHub](https://github.com/) this is the repository itself: the Commits page, the branches, the tags. [GitHub Docs: About commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/about-commits) is how that database looks in the UI.
+
+**The loop (same on a laptop and in the browser):**
+
+1. Edit files in the working tree.
+2. Stage the paths that belong in the next snapshot (explicit in [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor); implicit on the [GitHub](https://github.com/) [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files)).
+3. Commit. That snapshot is now in the repository.
+
+[Learn Git Branching](https://learngitbranching.js.org/) is a graph sandbox. It is the wrong tool if you want to practice the index; it is the right tool when we need you to *see* commits and branches. We will send you there on purpose in Branches and Merging, not as a hidden lab here.
+
+Uncommitted edits are not history. Discarding them in the [GitHub](https://github.com/) web editor is the browser analog; `git restore`, stash, and clean are Appendix G. Do not look for a stash button on [GitHub](https://github.com/). There is not one.
+
+**Working rule:** three areas, even when [GitHub](https://github.com/) hides the middle one. Working tree = what you are editing. Staging area = what the next commit will contain. Repository = saved snapshots.
+
+### Commits as Immutable History
+
+A **commit** is the snapshot plus metadata. [Git](https://git-scm.com/) writes a commit object that records:
+
+- A pointer to the **tree** (the project snapshot).
+- A pointer to the **parent** commit (or parents, for a merge). The first commit has none.
+- **Author** and committer (name, email, time).
+- A **message** — the "why" you will thank yourself for later.
+
+Canonical object layout: [Pro Git: Git Objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects), [Pro Git: Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell). Host explanation: [GitHub Docs: About commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/about-commits). [Git](https://git-scm.com/) names that object with a hash. The hash *is* the commit. There is no separate "commit number 47" that you can reuse.
+
+**Immutable means we add. We do not edit in place.**
+
+- Changing a file on [GitHub](https://github.com/) and clicking **Commit changes** creates a **new** commit on the branch. The old commit is still in the graph. You did not overwrite it.
+- A useful message is part of the object. "Fix typo in the last commit" as a *new* commit is the main-path move. Rewriting the old commit (amend, rebase, force-push) is Appendix A, not the normal workflow. The basic [GitHub](https://github.com/) web editor has no force-push button.
+- **Revert** on [GitHub](https://github.com/) (Conflicts and History Repair in the Browser) also adds a commit: a new snapshot that undoes an old one. The mistaken commit stays. That is the point of immutable history: the record remains, and the repair is itself a record.
+- [Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F) puts it as "Git generally only adds data." After a snapshot is in the database, losing it on purpose is hard — especially once another copy (the host) has it.
+
+**What a commit is not:**
+
+- Not a [GitHub](https://github.com/) pull request. A pull request is a host review object that *points at* commits.
+- Not a backup of untracked files or of secrets you never committed.
+- Not a license to rewrite published history because a message was sloppy. Add a follow-up commit on the main path.
+
+**Working rule:** a commit is a named, permanent snapshot. Future work is a new commit. Undo on the main path is a new commit too.
+
+### The Directed Acyclic Graph (DAG)
+
+Commits do not form a single numbered list. They form a **directed acyclic graph (DAG)**.
+
+- **Directed:** each commit points at its parent (or parents). The arrows go *backward* in time: the new commit knows what came before it. Parents do not point forward.
+- **Acyclic:** you cannot have a loop. A commit cannot be its own ancestor. [Git](https://git-scm.com/) would not know which snapshot is "later."
+- **Graph:** more than one line of work can exist at once. A **branch** is a movable name (a ref) that points at a commit. Two branches can share history, then diverge. A **merge commit** has two or more parents and is how those lines join again.
+
+[Pro Git: Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell) is the picture with objects. [Pro Git: Git References](https://git-scm.com/book/en/v2/Git-Internals-Git-References) is how names (`main`, `HEAD`) sit on top of the graph. We click branches in Branches and Merging. We need the DAG now so those names are not magic.
+
+**Shapes you will see:**
+
+1. **Root commit** — no parent. New repository, first snapshot.
+2. **Ordinary commit** — one parent. The usual save on a branch.
+3. **Merge commit** — two or more parents. [GitHub](https://github.com/)'s **Create a merge commit** button produces this. Squash-and-merge and rebase-and-merge produce different shapes; that comparison belongs in Branches and Merging.
+4. **Diverged branches** — two names pointing at different tips that share an ancestor. A pull request exists because two tips disagree.
+
+**Where to look (pointers, not a lab):**
+
+**[Learn Git Branching](https://learngitbranching.js.org/)**
+
+- **Primary function:** a visual sandbox. Commands *look like* the [Git](https://git-scm.com/) command line; the commit graph updates on screen.
+- **Open:** [learngitbranching.js.org](https://learngitbranching.js.org/). Source: [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching).
+- **What it is not:** it does not push to [GitHub](https://github.com/) and it does not install [Git](https://git-scm.com/). Use it when you want to *see* parents, branches, and merges. We will assign it as practice in Branches and Merging.
+
+**[GitHub](https://github.com/) Network graph**
+
+- **Primary function:** a timeline of commits across the repository and its forks.
+- **Docs:** [Understanding connections between repositories](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories) ([GitHub](https://github.com/) Insights → Network).
+- We read it on purpose in Branches and Merging (`Reading the Network Graph`). You do not need it to finish this chapter.
+
+The Commits page on a [GitHub](https://github.com/) repository is the same graph, flattened into a list for one branch. Parent links still sit on each commit.
+
+**Working rule:** history is a graph of snapshots. A branch is a name on that graph, not a copy of the project.
+
+### Hashes, SHAs, and Why Identity Matters
+
+Every [Git](https://git-scm.com/) object — blob, tree, commit, tag — is named by a **hash** of its contents. [Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F) calls this integrity: you cannot change a file or a directory without [Git](https://git-scm.com/) knowing. The [Git data model](https://git-scm.com/docs/gitdatamodel) and the [hash function transition](https://git-scm.com/docs/hash-function-transition) design doc are the canonical references.
+
+**What you will see on [GitHub](https://github.com/):**
+
+- A **SHA** (Secure Hash Algorithm) string on every commit. [GitHub Docs: About commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/about-commits) calls this unique ID a SHA or hash.
+- **[SHA-1](https://csrc.nist.gov/projects/hash-functions)** is the object format you will meet on the main path: **40** hexadecimal characters (`0-9`, `a-f`). Example shape: `24b9da6552252987aa493b52f8696cd6d3b00373` (from [Pro Git](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)).
+- [GitHub](https://github.com/) shortens that in lists (often **7** characters). The short form is a prefix of the full hash. The full hash is the identity. Click the commit to see more of it.
+- URLs, pull requests, compare views, and revert all hang off that ID. If two people say "the same commit," they mean the same hash.
+
+**Content-addressed storage:**
+
+- The same bytes produce the same blob hash. Two files with identical content share one object, even if their paths differ.
+- Change one byte of a file, and that blob gets a new hash. Change a commit message, an author, a parent, or the tree, and the **commit** gets a new hash. Descendants that pointed at the old commit no longer match. That is why "edit history" rewrites a chain, not a line of text. Appendix A is that topic. The main path adds commits instead.
+
+**[SHA-256](https://csrc.nist.gov/projects/hash-functions) exists. You do not need it for this book.**
+
+- [Git](https://git-scm.com/) is migrating object names from [SHA-1](https://csrc.nist.gov/projects/hash-functions) to a stronger hash. The project chose **[SHA-256](https://csrc.nist.gov/projects/hash-functions)** ([hash function transition](https://git-scm.com/docs/hash-function-transition)). Those IDs are **64** hex characters.
+- Algorithms are specified by [NIST hash functions](https://csrc.nist.gov/projects/hash-functions) ([FIPS 180-4](https://csrc.nist.gov/pubs/fips/180-4/upd1/final)).
+- The repositories you will click on [GitHub](https://github.com/) in this course use the [SHA-1](https://csrc.nist.gov/projects/hash-functions) object format. Treat 40-character IDs as the working default. If you ever open a [SHA-256](https://csrc.nist.gov/projects/hash-functions) repository, the model is the same: the hash is still the name.
+
+**Working rule:** the SHA is the name of the object. Identical content, identical name. Change the content, change the name. That is why identity matters for review, revert, and "are we looking at the same commit?"
+
+### What Distributed Means in Daily Work
+
+History and Evolution of Git defined distributed as a design choice: a clone can hold the full history. Here is what that means on a Tuesday, including Tuesdays spent in a browser.
+
+**A repository is a full copy of the graph.** Blobs, trees, commits, and the names that point at them travel together. [GitHub Docs: About Git](https://docs.github.com/en/get-started/using-git/about-git) says the same: repositories are self-contained. [GitHub](https://github.com/) is one such copy with a web UI, permissions, and [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow). It is not a checkout that still needs "the real server" in order for history to exist.
+
+**The daily verbs (same [Git](https://git-scm.com/), different buttons):**
+
+1. **Commit** records a snapshot in *this* repository. On [GitHub](https://github.com/) the [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) and [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) commit into the host copy. On a laptop, you commit into the disk copy and **push** later. The object is the same kind of object.
+2. **Publish** means another copy of the graph now has your commits. Push from a clone. On [GitHub](https://github.com/) you already committed on the host, so publish often looks like "the default branch updated" or "the pull request has new commits."
+3. **Fetch / pull** means this copy learns commits that already exist on another copy. **Sync fork** on [GitHub](https://github.com/) is that idea for a fork ([About forks](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks)). Pull Requests, Forks, and Code Review is the chapter.
+4. **Diverge, then review.** Two copies (or two branches on one copy) can point at different tips. A pull request is how [GitHub](https://github.com/) asks to join those graphs. That is distributed daily work, not a special website feature glued on later.
+
+**Copies you will actually meet in this book:**
+
+- **The [GitHub](https://github.com/) repository** — the shared copy we click. For the main path, this *is* your repository. You do not also clone it to disk.
+- **A fork** — another full [Git](https://git-scm.com/) repository you own, copied from someone else's. Still [Git](https://git-scm.com/). Still a complete graph.
+- **[github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor)** — an editor talking to that host copy. Not a second history database on your laptop.
+- **Optional [GitHub Codespaces](https://github.com/features/codespaces)** — a cloud machine with a real clone and [Git](https://git-scm.com/) installed. Another copy of the graph. Never required.
+- **[Learn Git Branching](https://learngitbranching.js.org/)** — a toy graph in the browser. Not a copy of your [GitHub](https://github.com/) repository.
+
+**What the browser does not give you, so we do not pretend:**
+
+- Offline commits on an airplane without [GitHub](https://github.com/). That is the laptop/local-[Git](https://git-scm.com/) story in Additional Resources (Git on Your Own Machine). In this course the host is on the network by definition.
+- A hidden second clone on your PC. If you only use [GitHub](https://github.com/) and [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor), the distributed model still holds: the host copy is complete, a fork is complete, a teammate's clone is complete. You are working on one of those copies.
+
+Other hosts — [GitLab](https://gitlab.com/), [Bitbucket](https://bitbucket.org/), [Codeberg](https://codeberg.org/), [Azure Repos](https://azure.microsoft.com/en-us/products/devops/repos) — store the same [Git](https://git-scm.com/) objects and speak the same fetch/push graph. Same engine, similar web UI, not our lab.
+
+**Working rule:** distributed means every complete copy can hold the DAG, not "there is no [GitHub](https://github.com/)." Our classroom uses one host so you can learn in the browser. The objects you create there are still [Git](https://git-scm.com/) commits.
+
+### Summary: Core Principles of Git
+
+We covered the model under the buttons. [Git](https://git-scm.com/) stores **snapshots**, not a list of file diffs; [GitHub](https://github.com/) still *shows* diffs so you can review ([Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)). Work moves through **three areas** — working tree, staging area (index), repository — even when the [GitHub](https://github.com/) [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) stages and commits in one click; [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) is where you will see Changes vs Staged. **Commits are immutable**: new work is a new snapshot with a parent, an author, and a message; revert adds a commit; rewriting is Appendix A. Those commits form a **DAG** (directed, acyclic). A branch is a name on that graph; [Learn Git Branching](https://learngitbranching.js.org/) and the [GitHub](https://github.com/) [Network graph](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories) are how you *see* it later. **Hashes** are identity: [SHA-1](https://csrc.nist.gov/projects/hash-functions) (40 hex characters) on the [GitHub](https://github.com/) main path, with [SHA-256](https://csrc.nist.gov/projects/hash-functions) documented as the successor ([hash function transition](https://git-scm.com/docs/hash-function-transition)). **Distributed** in daily work means each complete copy holds the graph; we commit on [GitHub](https://github.com/), forks are copies, and other hosts speak the same [Git](https://git-scm.com/). Next, we will walk through The Browser Lab.
