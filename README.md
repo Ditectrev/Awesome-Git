@@ -1003,3 +1003,236 @@ A **codespace** is a cloud virtual machine in the browser with a terminal and [G
 ### Summary: The Browser Lab
 
 We set up the classroom. You created or confirmed a personal [GitHub](https://github.com/) account on [GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products) ([Creating an account on GitHub](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)), verified email, and turned on 2FA — with no local [Git](https://git-scm.com/) and no paid plan. You walked the [GitHub](https://github.com/) UI (dashboard, profile, a public repository's Code tab) without creating a repo. Personal repositories belong to you; organizations are shared containers you do not sign in as ([About organizations](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations)). Visibility is public, private, or (enterprise-only) internal ([About repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories)). [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) is [VS Code](https://code.visualstudio.com/) in the browser (press `.`); [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github) and [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) (web) run there without a `git` binary, while [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph) does not. [Learn Git Branching](https://learngitbranching.js.org/) is the visual sandbox for the DAG. [GitHub Codespaces](https://github.com/features/codespaces) is an optional cloud machine with a terminal — never required. Next, we will walk through Repositories, Files, and Commits.
+
+## Repositories, Files, and Commits
+
+This is the first chapter where you create [Git](https://git-scm.com/) history. The Browser Lab gave you a personal [GitHub](https://github.com/) account and a map of the UI. Core Principles of Git named snapshots, the three areas, and hashes. Here those objects show up on a repository you own.
+
+**What you need:** that account, in a browser. Still no local `git` binary, no [GitHub Desktop](https://desktop.github.com/), no [GitHub Codespaces](https://github.com/features/codespaces/).
+
+**What you do:** create a repository named `hello-git` on your personal account, with a README, then add a file, edit the README, and delete the extra file. Each of those three edits is its own commit on the default branch. Then you read that history on the Commits page and on a single commit.
+
+**What stays in later chapters:** creating branches, opening a pull request, the conflict editor, `.gitignore` patterns, releases, and cleaning a secret out of history. The commit dialog will offer a new branch and a pull request. In this chapter you commit directly to the default branch so the history is one straight line you can read. Branches and Merging is next. Pull Requests, Forks, and Code Review comes after that.
+
+Canonical clicks: [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository), [Creating new files](https://docs.github.com/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files), [Deleting files in a repository](https://docs.github.com/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository), [About commits](https://docs.github.com/en/pull-requests/reference/commits), [Comparing commits](https://docs.github.com/en/pull-requests/how-tos/commit-changes/comparing-commits).
+
+### Creating a Repository on [GitHub](https://github.com/)
+
+A repository on [GitHub](https://github.com/) is a [Git](https://git-scm.com/) repository plus the host UI: files, commits, branches, and the pages around them. Docs: [About repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories), [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
+
+**Do this:**
+
+1. While signed in, open [github.com/new](https://github.com/new), or use the **+** menu and choose **New repository**.
+2. **Owner:** your personal account. An organization is a shared container (The Browser Lab). This practice repository belongs to you.
+3. **Repository name:** `hello-git`. [GitHub](https://github.com/) allows at most 100 characters: ASCII letters, digits, and `.`, `-`, `_`. The URL will be `https://github.com/YOUR-USERNAME/hello-git`.
+4. **Description** (optional): `Practice repository for the Git book.`
+5. **Visibility:** Public or Private. Both work on [GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products). Public means anyone can read it. Private means you and people you invite. Either way, the repository is on [GitHub](https://github.com/)'s servers. Do not put passwords, keys, or `.env` files in it. Secrets That Must Never Be Committed is the later rule; it already applies.
+6. Select **Add a README file**. Leave the `.gitignore` template, the license, and **Choose a template** unset. The following subsections say what those controls write.
+7. Leave [GitHub Marketplace](https://github.com/marketplace) app checkboxes clear. If the form offers a prompt that would populate the repository and open a draft pull request, leave that prompt empty. The commits in this chapter should be ones you wrote.
+8. Click **Create repository**.
+
+You land on the **Code** tab. The file list shows `README.md`. A link beside the branch name reports the commit count (1 commit). That commit is the root: no parent, message usually **Initial commit**, default branch usually `main`.
+
+If you cleared **Add a README file**, [GitHub](https://github.com/) shows a Quick setup page whose instructions are terminal commands ([Quickstart for repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories)). Leave that block alone. Use **Add file** → **Create new file**, name the file `README.md`, write one line, and commit directly to the default branch ([Creating new files](https://docs.github.com/en/repositories/working-with-files/managing-files/creating-new-files)). That file becomes the root commit.
+
+**Working rule:** one personal repository, `hello-git`, README on, template off, no terminal.
+
+#### The README as the First File
+
+A README is the front door of the repository. [GitHub](https://github.com/) renders it under the file list on the **Code** tab when the file sits in the repository root (also in `.github` or `docs`; we use the root). Docs: [About the repository README file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes). It should say what the project is. For `hello-git`, one honest sentence is enough. Content past 500 KiB is truncated on that page; you will not get close.
+
+Checking **Add a README file** writes one [Git](https://git-scm.com/) snapshot:
+
+1. A **blob** for the bytes of `README.md`.
+2. A **tree** that lists that path.
+3. A **root commit** — no parent — whose message is typically `Initial commit`. The default branch name points at that commit.
+
+That is the snapshot model from Core Principles of Git, produced by a checkbox. One commit can hold many files. A license and a `.gitignore` selected on the same form would be extra blobs in this same root commit, not extra commits.
+
+Open `README.md`. The address bar contains `/blob/main/README.md` (or your default branch name in place of `main`). The branch name means "whatever the tip is right now." Press `y`. [GitHub](https://github.com/) replaces the branch name with the full commit SHA. That URL is a permalink to this version of the file. Docs: [Getting permanent links to files](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files).
+
+**Do this:** read the rendered README on the **Code** tab, open the file, and press `y`. The SHA in the address bar is the root commit. You do not need to copy it yet.
+
+**Working rule:** the README checkbox is the root snapshot. The rendered page is a view. The commit is the object.
+
+#### License, gitignore, and Template Choices
+
+Three optional controls sit on the create form. Leave them off for `hello-git`. Know what they write so the form is not a surprise.
+
+**License**
+
+A license file (usually `LICENSE`) tells other people what they may do with the work. [GitHub](https://github.com/) detects known licenses and shows the name on the repository. Docs: [Licensing a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository). The short guide the picker is built from is [choosealicense.com](https://choosealicense.com/).
+
+You are not required to choose a license. With no license file, default copyright applies: you keep the rights, and other people are not granted permission to reuse the work. A public repository without a license is still public to read. It is not a grant to copy.
+
+For this practice repository, leave the license unset. If you later publish a project you want other people to use, add a license on purpose. The create-form picker is only offered for a new repository. Afterward you add `LICENSE` in the web editor ([Adding a license to a repository](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository)). Read [choosealicense.com](https://choosealicense.com/) before you pick one. MIT is a common permissive license; it is a choice, not a default we assign.
+
+**`.gitignore`**
+
+A `.gitignore` file lists paths [Git](https://git-scm.com/) should leave out of future snapshots. Docs: [Ignoring files](https://docs.github.com/en/get-started/git-basics/ignoring-files). The menu on the create form is filled from [github/gitignore](https://github.com/github/gitignore): starter lists for a language or a tool.
+
+`hello-git` has no build output. Leave the template unset so the root tree is a single README. Releases, Ignore Files, and Repository Hygiene is where we read patterns and where we say again which secrets must never be committed. Selecting a template now would add a file. It would not teach those rules.
+
+**Template repository**
+
+**Choose a template** copies another repository's files into a new one. Docs: [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template). The new repository starts with a **single commit**. It does not keep the template's history. A fork is the other shape: a fork copies the parent history. Pull Requests, Forks, and Code Review is that chapter. A template is a starter kit. Branches created from a template have unrelated histories, so you cannot open a pull request from them back into the template the way you can from a fork.
+
+Leave the menu empty. `hello-git` should start as your README.
+
+**Working rule:** README on. License, `.gitignore`, and template off. A license is a legal file you add when you mean it. A gitignore template waits for the later chapter. A template repository is a new root commit, not your history.
+
+### Making Your First Commit in the [GitHub](https://github.com/) Web Editor
+
+The root commit already exists. The next commit is a new snapshot: a new tree, one parent (the root), you as the author, and a message you write.
+
+The [web file editor](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) folds the three areas into one dialog. You edit the working tree in the text box. **Commit changes** stages that file and writes the commit. You do not see **Changes** versus **Staged Changes** here. [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) is where that split is visible (The Browser Lab). Stay in the simple editor for this chapter so each click is one file and one commit. The commit object itself is documented in [About commits](https://docs.github.com/en/pull-requests/reference/commits).
+
+The dialog asks two things that matter:
+
+1. A **commit message**, plus an optional extended description. The next subsection is how to write it.
+2. **Where the commit lands.** **Commit directly to the `main` branch** (the default branch name on a new [GitHub](https://github.com/) repository), or **Create a new branch for this commit and start a pull request**.
+
+[GitHub](https://github.com/)'s file docs prefer a new branch when you are editing the default branch, then a pull request ([Editing files](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files)). That is the right habit on a shared repository, and it is [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow). On `hello-git` you are the only writer, and the next chapter is branches. For every commit in this chapter, choose **Commit directly** to the default branch. The button then reads **Commit changes**. **Propose changes** is the other path: a new branch, or an edit in a repository you do not own (which forks and opens a pull request). We want the new snapshot on the default branch so the Commits page is one line.
+
+The same dialog lists verified email addresses on your account. If email privacy is on, the default is a [GitHub](https://github.com/) `noreply` address. Either is a valid author email. Docs: [Setting your commit email address](https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address). [Git](https://git-scm.com/) stores an email on the commit. [GitHub](https://github.com/) is choosing it from your account. You do not configure `git` locally to make that true.
+
+**Working rule:** web editor, one file, commit directly to the default branch. The new-branch option waits until we open pull requests.
+
+#### Adding, Editing, and Deleting Files
+
+Three commits, three shapes of diff. Stay on the default branch. Replace the suggested message each time. The message section explains why; the steps include a subject you can use as written.
+
+**1. Add a file** ([Creating new files](https://docs.github.com/en/repositories/working-with-files/managing-files/creating-new-files))
+
+1. On the **Code** tab, open **Add file** → **Create new file**.
+2. File name: `NOTES.md`.
+3. Body: `A file I will delete after I can see it in history.`
+4. Click **Commit changes...**
+5. Message: `Add a practice note`
+6. Choose **Commit directly** to the default branch.
+7. Click **Commit changes**.
+
+The file list now shows `README.md` and `NOTES.md`. The commit count is 2.
+
+**Upload files** can put several files in one commit ([Adding a file to a repository](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository)). **Create new file** is one path. We use it so the diff is a single new blob. In [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) you can stage several paths and commit once; that is the index, and it is optional here.
+
+**2. Edit a file** ([Editing files](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files))
+
+1. Open `README.md`.
+2. Use the pencil (edit) control. The dropdown also offers [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor). Stay in the web editor.
+3. Add a line: `Created in the browser, without installing Git.`
+4. **Preview** shows the rendered Markdown. Then **Commit changes...**
+5. Message: `Describe the practice repository`
+6. Commit directly to the default branch. Click **Commit changes**.
+
+[GitHub](https://github.com/) will often suggest `Update README.md`. That names the file. It does not say why the snapshot exists. Replace it.
+
+**3. Delete a file** ([Deleting files in a repository](https://docs.github.com/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository))
+
+1. Open `NOTES.md`.
+2. Open the file menu and click **Delete file**. Clearing the text box and committing would leave an empty blob. Delete the path.
+3. Message: `Remove the practice note`
+4. Commit directly to the default branch. Click **Commit changes**.
+
+`NOTES.md` is gone from the tip of the default branch. It is still in history. The parent of this commit still points at a tree that contains that blob. Deleting a path in a new snapshot does not rewrite the old snapshot. That is the immutable history from Core Principles of Git.
+
+If the file had been a password or a key, deleting it on the tip would leave the bytes in older commits. [GitHub](https://github.com/) says the same on the delete docs: sensitive data stays in history until you remove it from history. Secrets That Must Never Be Committed, and Common Challenges and Debugging Tips (`I Committed a Secret`), are that problem. `NOTES.md` is not a secret. We delete it so the diff shows a removal.
+
+You now have four commits on the default branch: `Initial commit`, `Add a practice note`, `Describe the practice repository`, `Remove the practice note`.
+
+**Working rule:** add, edit, delete — three commits on the default branch, after the root. The deleted file remains in an older commit.
+
+#### Commit Messages That Future You Can Use
+
+The message is part of the commit object. The hash covers it. Changing the message later means a new hash, which is history rewriting (Appendix A). Write the message as if you will read the Commits page in a month and need to know which snapshot to open.
+
+[Pro Git](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines) states the usual guidelines. This is the part that matters in the web dialog.
+
+**Subject (the first box):**
+
+- Imperative mood, as an instruction: `Add a practice note`, `Describe the practice repository`, `Remove the practice note`.
+- Say what the snapshot is for. `Update README.md`, `Create NOTES.md`, and `Delete NOTES.md` are the labels [GitHub](https://github.com/) suggests. Replace them.
+- One skimmable line. [Pro Git](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines) aims at about 50 characters. You do not need to count. Stop before the subject becomes a paragraph.
+
+**Extended description (the second box):**
+
+- Optional on these three commits. Use it when the subject cannot hold the reason.
+- Say why. The diff already shows which lines moved.
+- The second box is the body. You do not type a blank line yourself. [Git](https://git-scm.com/) stores subject and body as the message.
+
+You can ignore, for this chapter, the docs' note about putting several authors in one message. One author is enough: you. Signed commits and the verified badge are Appendix F. A team convention such as prefixing `feat:` or `fix:` can wait until a team asks for it. Your own history is readable without that prefix.
+
+**Working rule:** imperative subject, a body only when you need the reason, and a message you wrote rather than the filename [GitHub](https://github.com/) filled in.
+
+### Reading History Without a Terminal
+
+You have a line of snapshots on the default branch. Each commit except the root has one parent. You will read that line in the browser. There is no `git log` on this path. Another host can show the same [Git](https://git-scm.com/) objects with different labels. These clicks are [GitHub](https://github.com/)'s.
+
+#### The Commits Page
+
+On the **Code** tab, select the commit count. The URL looks like `https://github.com/YOUR-USERNAME/hello-git/commits/main`.
+
+That page is one branch of the DAG, drawn as a list, newest first. Each row shows:
+
+- The subject.
+- The author.
+- When.
+- A short SHA. The short form is a prefix of the full hash from Core Principles of Git. Open the commit to see the rest.
+
+The list is every commit reachable on **this branch**, not "every commit that touched one file." A file's **History** view omits commits that did not change that file. [Comparing commits](https://docs.github.com/en/pull-requests/how-tos/commit-changes/comparing-commits) documents the difference (Differences between commit views). When a file's history looks too short, use the repository Commits page.
+
+The list is also not the network of forks and other branches. The [Network graph](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories) is Branches and Merging.
+
+**Do this:** open the Commits page. `Remove the practice note` is at the top. `Initial commit` is at the bottom. That order is newest first.
+
+**Working rule:** the Commits page is one branch, newest first. It is the graph flattened into a list.
+
+#### Inspecting a Commit Diff
+
+Open `Describe the practice repository`. The URL is `https://github.com/YOUR-USERNAME/hello-git/commit/SHA`. Docs: [About commits](https://docs.github.com/en/pull-requests/reference/commits).
+
+On that page you get the subject, the body if you wrote one, the author, the time, a **1 parent** link, the full SHA, and the files that differ from the parent. For this commit that file is `README.md`. Added lines and removed lines are highlighted. [GitHub](https://github.com/) computed that patch by comparing this commit's tree with its parent's tree. [Git](https://git-scm.com/) stored the trees. [Comparing commits](https://docs.github.com/en/pull-requests/how-tos/commit-changes/comparing-commits) is the host view of that idea. Core Principles of Git is why a diff on screen is not proof that history is a list of patches.
+
+The file list on the commit is the paths that **changed**. A later subsection opens the whole tree, including files this commit left alone.
+
+**Do this:**
+
+1. On the README edit, find the line you added.
+2. Open `Remove the practice note`. `NOTES.md` is a deletion.
+3. Open `Add a practice note`. `NOTES.md` is an addition.
+
+Same path, two commits, two directions. The deletion commit does not erase the addition commit.
+
+**Working rule:** a commit page is one snapshot compared with its parent. The highlighting is a view. The object is the tree.
+
+#### Blobs, Trees, and Parents as [GitHub](https://github.com/) Shows Them
+
+Three URL shapes are the object model in the address bar.
+
+| What you open | URL shape | [Git](https://git-scm.com/) object |
+| --- | --- | --- |
+| One file | `/blob/<ref>/<path>` | A blob, reached through a tree |
+| A directory, or the repository root | `/tree/<ref>` or `/tree/<ref>/<dir>` | A tree |
+| One snapshot | `/commit/<sha>` | A commit |
+
+`<ref>` is a branch name or a commit SHA. `main` moves when you commit again. A SHA does not.
+
+**Parents.** A normal commit page shows **1 parent** and a short SHA. That parent is the previous snapshot. Click it and you are on the older commit, still on the same branch history.
+
+Follow **1 parent** from `Remove the practice note`. You pass `Describe the practice repository`, then `Add a practice note`, and you stop at `Initial commit`. The root commit does not list a parent. There is no older snapshot of `hello-git`.
+
+**The whole tree.** The commit page lists files that changed. The snapshot still contains every tracked path. Open `https://github.com/YOUR-USERNAME/hello-git/tree/SHA` with the SHA of `Add a practice note`. That tree lists `README.md` and `NOTES.md`. Open `NOTES.md` there. The URL contains `/blob/` and the body is the sentence you wrote. The **Code** tab of the branch tip does not list `NOTES.md`. The blob is still in the older tree. Deleting the path in a later commit did not destroy the object.
+
+**Permalink.** On a file viewed through `/blob/main/...`, press `y`. The branch name becomes the SHA of the commit at the tip when you pressed it. Docs: [Getting permanent links to files](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files). Use that URL when you mean this version of the file. A `/blob/main/` link means whatever the branch tip is later.
+
+**Do this:**
+
+1. From `Remove the practice note`, click **1 parent** until the page stops offering a parent. That last page is the root.
+2. Open the tree for `Add a practice note` and then open `NOTES.md`. The file is still there.
+3. On today's `README.md` from the **Code** tab, press `y`. The SHA matches the tip commit (`Remove the practice note`), not the root.
+
+**Working rule:** `/commit/` names the snapshot, `/tree/` is the directory listing, `/blob/` is one file. Parents walk backward. The root stops the walk.
+
+### Summary: Repositories, Files, and Commits
+
+We made the first history you can point at. You created `hello-git` on your personal [GitHub](https://github.com/) account ([Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository)) with a README and without a license, a `.gitignore` template, or a template repository. That checkbox wrote the root commit: a tree, a blob, no parent, message `Initial commit` ([About the repository README file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)). You added `NOTES.md`, edited `README.md`, and deleted `NOTES.md` in the web editor ([Creating new files](https://docs.github.com/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files), [Deleting files in a repository](https://docs.github.com/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository)), each time with **Commit directly** to the default branch and an imperative subject ([Pro Git](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines) commit guidelines) in place of the filename [GitHub](https://github.com/) suggested. The Commits page lists that one branch, newest first. A commit page shows a diff [GitHub](https://github.com/) computed against the parent ([Comparing commits](https://docs.github.com/en/pull-requests/how-tos/commit-changes/comparing-commits), [About commits](https://docs.github.com/en/pull-requests/reference/commits)). `/tree/<sha>` is the whole snapshot, `/blob/` is one file, and `y` pins the URL to a SHA ([Getting permanent links to files](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files)). The deleted note is absent from the tip and still present in the older tree. Next, we will walk through Branches and Merging.
