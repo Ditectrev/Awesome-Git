@@ -1236,3 +1236,189 @@ Follow **1 parent** from `Remove the practice note`. You pass `Describe the prac
 ### Summary: Repositories, Files, and Commits
 
 We made the first history you can point at. You created `hello-git` on your personal [GitHub](https://github.com/) account ([Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository)) with a README and without a license, a `.gitignore` template, or a template repository. That checkbox wrote the root commit: a tree, a blob, no parent, message `Initial commit` ([About the repository README file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)). You added `NOTES.md`, edited `README.md`, and deleted `NOTES.md` in the web editor ([Creating new files](https://docs.github.com/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files), [Deleting files in a repository](https://docs.github.com/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository)), each time with **Commit directly** to the default branch and an imperative subject ([Pro Git](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines) commit guidelines) in place of the filename [GitHub](https://github.com/) suggested. The Commits page lists that one branch, newest first. A commit page shows a diff [GitHub](https://github.com/) computed against the parent ([Comparing commits](https://docs.github.com/en/pull-requests/how-tos/commit-changes/comparing-commits), [About commits](https://docs.github.com/en/pull-requests/reference/commits)). `/tree/<sha>` is the whole snapshot, `/blob/` is one file, and `y` pins the URL to a SHA ([Getting permanent links to files](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files)). The deleted note is absent from the tip and still present in the older tree. Next, we will walk through Branches and Merging.
+
+## Branches and Merging
+
+Repositories, Files, and Commits left you with one line of snapshots on the default branch of `hello-git`. A branch is how [Git](https://git-scm.com/) names a second line without copying the project. A merge is how those lines join. On [GitHub](https://github.com/) the join is a button on a pull request. This chapter creates the branch, reads the three buttons, and looks at the graph they leave behind. Reviewers, comments, drafts, and forks are the next chapter. You still do not install [Git](https://git-scm.com/).
+
+**What you need:** `hello-git` on your personal account, with the commits from the previous chapter.
+
+**What you do:** create a branch, commit on it, see that the default branch did not move, then merge through a pull request. You will press **Create a merge commit**, **Squash and merge**, and **Rebase and merge** once each. You will also draw the same shapes in [Learn Git Branching](https://learngitbranching.js.org/).
+
+Canonical pages: [About branches](https://docs.github.com/en/pull-requests/reference/branches), [Managing branches within your repository](https://docs.github.com/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository), [About merge methods on GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github), [Merging a pull request](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/merging-a-pull-request), [Pro Git: Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell).
+
+### What a Branch Is
+
+A **branch** is a movable name for one commit. [Pro Git: Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell) is the object picture: the name is a pointer, and the commits are the snapshots you already know. Creating a branch does not copy files and does not duplicate history. The new name points at the same commit the old name points at, until somebody makes a new commit.
+
+[GitHub](https://github.com/) says the same thing in product language. A branch is a contained line of work — a feature, a fix, or an experiment — started from an existing branch, usually the default branch ([About branches](https://docs.github.com/en/pull-requests/reference/branches)).
+
+**What moves:**
+
+- A new commit on the branch you are viewing moves **that** name forward to the new snapshot. The other name stays where it was.
+- Both names still share every ancestor up to the commit where they split.
+- The files you see on the **Code** tab are the tree of whichever name is selected. Switching the name switches the tree. It does not create a commit.
+
+The branch dropdown on `hello-git` is that name. In the last chapter it stayed on the default branch, so every commit moved the same pointer. This chapter adds a second pointer.
+
+**Working rule:** a branch is a label on a commit, not a folder of copies. New work moves the label you committed on.
+
+### The Default Branch
+
+When you created `hello-git` with a README, [GitHub](https://github.com/) made one branch and marked it the **default branch**. Docs: [About branches](https://docs.github.com/en/pull-requests/reference/branches) (About the default branch).
+
+That branch is:
+
+- The tree [GitHub](https://github.com/) shows when someone opens the repository.
+- The base branch for a new pull request, unless you pick another.
+- The branch a local clone checks out first. You are not cloning. The fact still explains why the default branch is the one other people mean by "the project."
+- Named `main` on a new repository. [GitHub](https://github.com/) has used that name for new repositories for years. A repository that still says `master` is a later debugging note (Common Challenges and Debugging Tips). Do not rename `hello-git` in this chapter.
+
+You can change which branch is the default ([Changing the default branch](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch)). Leave it. You also cannot delete the default branch until another branch is the default. We will not do that dance.
+
+**Protected branches** and rulesets can require reviews or block a merge. Docs: [About branches](https://docs.github.com/en/pull-requests/reference/branches) (Working with protected branches). `hello-git` has none. Collaboration, Access, and Other Git Hosts is where those rules belong. If a merge button is greyed out on this practice repository, you turned a rule on; turn it off or use a repository without rules. Do not build branch protection for the exercise.
+
+**Working rule:** the default branch is the name the repository opens on. On `hello-git` that name is `main`. Leave it.
+
+### Creating, Switching, and Deleting Branches on [GitHub](https://github.com/)
+
+Docs: [Managing branches within your repository](https://docs.github.com/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository). You need write access. You have it: you own `hello-git`.
+
+**Create.** On the **Code** tab, open the branch dropdown (in the file tree, or at the top of the file list). The field reads **Find or create a branch...**. Type a name that does not already exist, then click **Create branch**. The other path is **View all branches** → **New branch**, where you also pick the source branch. A new branch always starts from an existing branch. If the dropdown was sitting on `main`, the new name points at the same commit `main` points at.
+
+Use a short name without spaces: `status-line`, `squash-line`, `rebase-line`. A slash (`feature/status`) is legal and groups names in the branch list. You do not need it here.
+
+**Switch.** Choose the other name in the same dropdown. The **Code** tab renders that tip. The URL gains the branch name. No commit happens. Unsaved text in the web editor does not travel with you; commit or discard it before you switch.
+
+**Delete.** **View all branches**, then the delete control next to the name. Read the warning and confirm. You cannot delete the default branch. If the branch is the head of an open pull request, deleting it closes that pull request. Deleting a name does not delete commits that another name can still reach. After a merge, `main` can still see the snapshots; only the extra label is gone. [GitHub](https://github.com/) can delete the head branch for you when you merge ([Managing branches within your repository](https://docs.github.com/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository)).
+
+**Do this:**
+
+1. With `main` selected, create a branch named `scratch`. Open **View all branches** ([Viewing branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/viewing-branches-in-your-repository)). `main` is marked default. `scratch` points at the same commit, so the history did not grow.
+2. Delete `scratch`. Confirm. `main` and its commits are still there.
+3. Select `main` again. Create `status-line`.
+4. On `status-line`, edit `README.md` and add a line at the end: `Branch practice: this line started on status-line.` Commit **directly to `status-line`** (not "create a new branch"). Message: `Note the branch practice line`.
+5. Switch the dropdown to `main`. The new line is absent. Switch back to `status-line`. The line is there.
+
+Leave `status-line` in place. The merge section uses it. Do not delete `main`.
+
+**Working rule:** create from the branch you mean to start from, switch to read another tip, delete names you are finished with. The default branch stays.
+
+### When to Branch: Features, Fixes, and Experiments
+
+[About branches](https://docs.github.com/en/pull-requests/reference/branches) lists the usual reasons: build a feature, fix a bug, or try an idea without putting it on the default branch yet.
+
+The previous chapter committed straight to `main` on purpose. You were the only writer, and the lesson was one line of commits. That is a poor habit on a repository other people use. A commit on the default branch is immediately the project people open.
+
+**Use a branch when:**
+
+- The change is a feature you want to look at as one unit (`status-line` is the stand-in).
+- The change is a fix you might want to drop.
+- The change is an experiment. If you delete the branch before merging, the default branch never contained it. Commits that only that name could reach become hard to find. That is the point of an experiment.
+
+**Stay on the default branch when:**
+
+- You are alone in a practice repository and the edit is the lesson itself, as in the last chapter.
+- The repository is a scratch pad with no one else reading `main`.
+
+From here on, a change you would want reviewed goes on a branch. [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) is that loop: branch, commit, pull request, merge. We open the pull request in this chapter only because that is where the merge buttons are. The review half of the loop is next.
+
+**Working rule:** branch for work you might merge, reject, or show to someone else. The default branch stays the agreed tip until you merge.
+
+### Visual Practice in [Learn Git Branching](https://learngitbranching.js.org/)
+
+[Learn Git Branching](https://learngitbranching.js.org/) draws the pointers while you type commands that look like [Git](https://git-scm.com/). It does not push to [GitHub](https://github.com/) and it does not install [Git](https://git-scm.com/). You already finished **Introduction to Git Commits** in The Browser Lab.
+
+**Do this:**
+
+1. Open [learngitbranching.js.org](https://learngitbranching.js.org/).
+2. In the Introduction Sequence, complete **Branching in Git**. Watch a second name appear on the same commit, then move when you commit.
+3. Complete **Merging in Git**. Watch a merge commit gain two parents.
+4. Stop before **Rebase Introduction**. Appendix A is the visual rebase, including the [GitHub](https://github.com/) rebase button's cousin on the command line. [Pro Git: Rebasing](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) is that picture. We are not in that chapter.
+
+The sandbox's `git branch`, `git checkout` or `git switch`, and `git merge` are how the levels talk. Typing them here is not a [GitHub](https://github.com/) workflow. When the graph makes sense, come back to `hello-git` and press the real buttons.
+
+**Working rule:** [Learn Git Branching](https://learngitbranching.js.org/) is where you watch names and parents. [GitHub](https://github.com/) is where `hello-git` actually joins.
+
+### Merge, Squash and Merge, and Rebase and Merge
+
+On [GitHub](https://github.com/) you merge by merging a pull request. There is no separate "merge these two branches" button on the **Code** tab. Docs: [Merging a pull request](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/merging-a-pull-request), [Creating a pull request](https://docs.github.com/en/pull-requests/how-tos/create-pull-requests/creating-a-pull-request), [About merge methods on GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github).
+
+A new personal repository allows all three methods. The control at the bottom of the pull request is a dropdown:
+
+- **Create a merge commit** (the default **Merge pull request** action).
+- **Squash and merge**.
+- **Rebase and merge**.
+
+If one of them is missing, the repository's pull-request settings turned it off. The checkboxes are documented in [Configuring commit merging](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-merging-for-pull-requests), [Configuring commit squashing](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests), and [Configuring commit rebasing](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-rebasing-for-pull-requests). On `hello-git` you should not need Settings.
+
+This pull request is only the door to that dropdown. Leave reviewers empty. On the create button, choose **Create pull request**, not the draft option. A draft cannot be merged. Drafts, reviews, and comments are Pull Requests, Forks, and Code Review.
+
+**Do this (merge commit, on the branch you already have):**
+
+1. On `hello-git`, with `status-line` ahead of `main`, use the **Compare & pull request** banner, or open **Pull requests** → **New pull request**. Base: `main`. Compare: `status-line`.
+2. Title: `Add a branch practice line`. Create the pull request. Do not request a review.
+3. At the bottom, open the merge dropdown and choose **Create a merge commit**. If the button already says **Merge pull request**, that is this method. Confirm.
+4. Accept the default merge message. It records the pull request number and the branch name. That message is doing a job the filename suggestions in the last chapter were not doing.
+5. Open the new commit on `main`. It lists **2 parents**. One is the previous tip of `main`. The other is the tip of `status-line` (`Note the branch practice line`).
+6. Switch the **Code** tab to `main`. The practice line is there. Delete `status-line` if [GitHub](https://github.com/) offers **Delete branch**. `main` still has both parents' snapshots.
+
+**Do this (the other two buttons).** Switch to `main` before each **Create branch**, so the new name starts from the updated default branch. Add each sentence at the **end** of `README.md` so the lines do not collide. Conflicts are the next chapters' problem; this chapter stays on a clean join.
+
+1. Branch `squash-line`. Add `Squash practice: one commit on the default branch.` Commit directly to `squash-line` with message `Add a squash practice line`. Note that commit's short SHA. Open a pull request into `main`, title `Add a squash practice line`. Choose **Squash and merge**, then confirm. The new tip of `main` has **1 parent**, not 2. Its SHA is not the SHA you noted on `squash-line`. The subject is the pull request title. Delete `squash-line` after you have compared the two SHAs.
+2. Branch `rebase-line`. Add `Rebase practice: its own commit, new SHA, no merge commit.` Commit directly to `rebase-line` with message `Add a rebase practice line`. Note that SHA. Open a pull request into `main`. Choose **Rebase and merge**. [GitHub](https://github.com/) does not create a merge commit, so there is no merge-message box of the kind the first button showed. The tip of `main` has **1 parent** and the subject `Add a rebase practice line`, with a **different** SHA from the one on `rebase-line`. Delete `rebase-line` after you have seen both SHAs.
+
+You now have three different joins on one repository. The subsections say why the graphs differ.
+
+**Working rule:** merging on [GitHub](https://github.com/) is a pull-request button. The dropdown chooses the shape. The branch you wrote on can be deleted afterward; the result lives on the default branch.
+
+#### Fast-Forward vs a Merge Commit
+
+[Pro Git: Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging) describes a **fast-forward**. If the default branch has not moved since you branched, it is a direct ancestor of the branch tip. A fast-forward slides the default-branch name forward to that existing commit. No new snapshot. One parent chain. The SHA on the default branch becomes the SHA you already created.
+
+[GitHub](https://github.com/)'s **Create a merge commit** does not take that shortcut. The docs say the pull request is merged with the `--no-ff` option ([About merge methods on GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github)). You get a new merge commit with **two parents** even when a fast-forward was possible. That is why `status-line` produced a merge commit although you had not committed on `main` in between.
+
+The other two buttons do use a fast-forward, after they manufacture new commits ([Merging a pull request](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/merging-a-pull-request)):
+
+- **Squash and merge** builds one new commit whose tree matches the branch tip, then fast-forwards the base branch to it. One parent. New SHA.
+- **Rebase and merge** copies each branch commit onto the base branch as a new commit, then fast-forwards. One parent per copied commit. New SHAs. [GitHub](https://github.com/) always updates the committer and always writes new SHAs, including when the copy sits directly on the old tip ([About merge methods on GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github)). A pure fast-forward would have reused the SHA. This button does not.
+
+If `main` had gained a commit your branch does not contain, a fast-forward is impossible. A merge commit is the join. A rebase replays your commits on top of that newer tip. Same files edited on both sides produce a conflict. Conflicts and History Repair in the Browser is that editor. We avoided it by adding lines at the end and by branching from current `main`.
+
+**Working rule:** fast-forward means the branch name slides to a commit that already exists. [GitHub](https://github.com/)'s merge button writes a two-parent commit anyway. Squash and rebase fast-forward to commits they just created, so the SHAs are new.
+
+#### When Each [GitHub](https://github.com/) Merge Button Fits
+
+All three land the same tree when the pull request is one clean change. They land different history. Docs: [About merge methods on GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github).
+
+**Create a merge commit** when you want the branch preserved as a unit. The two parents say "this tip of `main` and that tip of the branch became this snapshot." The merge message names the pull request. Every commit you made on the branch stays on `main`, including the noisy ones (`wip`, `fix typo`). Use it when that trail is worth keeping. You already did this with `status-line`.
+
+**Squash and merge** when the branch history is scratch work and the default branch should gain one snapshot. [GitHub](https://github.com/) says work-in-progress commits help on the branch and do not all need to stay on the default branch. The cost, which the same page states: you lose when each small commit happened and who authored those squashed commits, as separate objects on the default branch. The new commit's author is you, at merge time. Its subject should be the imperative pull-request title (`Add a squash practice line`), not a list of leftovers. One more cost from that page: if you keep committing on the old branch and open another pull request, commits you already squashed can show up again, because those SHAs were never parents of `main`. Delete the branch after the squash, and start the next idea from fresh `main`.
+
+**Rebase and merge** when each commit on the branch is already a commit you want on the default branch, in a straight line, with no merge bubble. Subjects stay. SHAs change. This is not an interactive rebase: you do not reorder, squash, or edit messages in this button. You do not force-push. The [GitHub](https://github.com/) docs mention force-push for people who must update a branch from the command line before this button will run. That path is Appendix A. The web editor has no force-push button. On `hello-git` the button worked because the branch was a straight line of new commits on top of `main`.
+
+A merge queue, or a ruleset that allows only one method, removes the dropdown. You will not meet a merge queue on this practice repository. The name is enough so the missing dropdown is not a mystery later.
+
+**Working rule:** merge commit keeps the join and the branch commits. Squash keeps one new snapshot. Rebase keeps each commit and replaces the SHAs. Pick the shape you want strangers to read on `main` in a year.
+
+#### Reading the Network Graph
+
+The **Network** graph draws commits across the repository's branches and forks. Docs: [Understanding connections between repositories](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories). Open `https://github.com/YOUR-USERNAME/hello-git/network`, or the repository's **Insights** → **Network**.
+
+**How to read the dots on `hello-git`:**
+
+- Each dot is a commit. Time runs along the graph. Your root commit is the oldest.
+- A line is a branch name moving from parent to child.
+- The merge commit from `status-line` is a dot with two incoming lines: `main` and the branch. That is the two parents from the commit page, drawn sideways.
+- The squash commit and the rebase commit sit on the `main` line with one parent each. They do not draw a second line into `main`, because [GitHub](https://github.com/) fast-forwarded after writing new commits.
+- Forks would appear as more lines. You have not forked this repository. Pull Requests, Forks, and Code Review is that copy.
+
+The graph can lag a minute behind a merge. Reload if the new dot is missing. The Commits page on `main` is the same history as a list, newest first, and it updates immediately. Use the list to read messages and SHAs. Use the network graph to see which joins had two parents.
+
+**Do this:** open the network graph. Find the two-parent join. Find the later dots that stay on one line. Click a dot if the graph links it to the commit page, and check the parent count against what you saw earlier.
+
+**Working rule:** two incoming lines mean a merge commit. A single line through a new dot means squash or rebase-and-merge. The Commits page is the same graph as text.
+
+### Summary: Branches and Merging
+
+We gave `hello-git` more than one name. A branch is a pointer to a commit ([Pro Git: Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)); creating one does not copy the repository. The default branch is the name [GitHub](https://github.com/) opens and the usual base of a pull request — `main` on this repository ([About branches](https://docs.github.com/en/pull-requests/reference/branches)). You created `scratch` and deleted it, then committed on `status-line` and watched `main` stay still ([Managing branches within your repository](https://docs.github.com/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository)). [Learn Git Branching](https://learngitbranching.js.org/) supplied the picture: **Branching in Git** and **Merging in Git**, and not **Rebase Introduction**. Merging happened on a pull request ([Merging a pull request](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/merging-a-pull-request)). **Create a merge commit** uses `--no-ff`, so you got two parents even though a fast-forward was possible ([About merge methods on GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github)). **Squash and merge** put one new SHA on `main`. **Rebase and merge** kept the subject and wrote a new SHA, with one parent and no merge commit. The [Network graph](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories) shows the two-parent join as two lines and the other two joins as one line. Next, we will walk through Pull Requests, Forks, and Code Review.

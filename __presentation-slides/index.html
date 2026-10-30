@@ -1487,6 +1487,261 @@
 * Commits page: one branch, newest first; commit page: computed diff vs parent <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
 * Deleted `NOTES.md` is gone from the tip and still in the older tree <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
 * Next: Branches and Merging <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+## Branches and Merging <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+## Branches and Merging <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A second line of work, without copying the project <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Still `hello-git` in the browser; no local [Git](https://git-scm.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Create a branch, commit, watch `main` stay still <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Press all three merge buttons once <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Reviews, drafts, and forks are the next chapter <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What a Branch Is <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### What a Branch Is <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A movable name for one commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Pro Git: Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Creating a branch does not copy files or history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The new name points at the same commit until you commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A new commit moves only the name you committed on <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### What a Branch Is <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [GitHub](https://github.com/): a feature, a fix, or an experiment ([About branches](https://docs.github.com/en/pull-requests/reference/branches)) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The branch dropdown is the name you are viewing <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Switching names switches the tree <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Switching does not create a commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Default Branch <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### The Default Branch <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* The branch [GitHub](https://github.com/) created with the README <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* What visitors see; the usual base of a pull request <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Named `main` on a new repository <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [About branches](https://docs.github.com/en/pull-requests/reference/branches) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Do not rename `hello-git` here <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### The Default Branch <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* You cannot delete the default branch until another branch is the default <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Changing the default branch](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch) can wait <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Protected branches and rulesets can block a merge <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `hello-git` has none; do not add them for this exercise <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Creating, Switching, and Deleting Branches on GitHub <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Creating, Switching, and Deleting Branches on GitHub <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Dropdown: **Find or create a branch...** → **Create branch** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Or **View all branches** → **New branch** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Managing branches within your repository](https://docs.github.com/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A new branch starts from the branch you are on <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Switch in the same dropdown; unsaved editor text does not follow <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Creating, Switching, and Deleting Branches on GitHub <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Delete from **View all branches** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* You cannot delete the default branch <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Deleting a name does not delete commits another name can reach <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Create `scratch` from `main`, then delete it <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* History did not grow: both names pointed at one commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Creating, Switching, and Deleting Branches on GitHub <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* From `main`, create `status-line` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Add a line at the end of `README.md` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commit directly to `status-line`: `Note the branch practice line` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* On `main`, the line is absent; on `status-line`, it is there <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Leave `status-line` for the merge <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### When to Branch: Features, Fixes, and Experiments <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### When to Branch: Features, Fixes, and Experiments <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Feature you want as one unit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Fix you might drop <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Experiment the default branch should not contain yet <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [About branches](https://docs.github.com/en/pull-requests/reference/branches) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### When to Branch: Features, Fixes, and Experiments <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Last chapter committed to `main` to learn one line <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* On a shared repository, that tip is what other people open <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow): branch, commit, pull request, merge <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* This chapter uses the pull request to reach the merge buttons <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Visual Practice in Learn Git Branching <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Visual Practice in Learn Git Branching <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Open [Learn Git Branching](https://learngitbranching.js.org/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Introduction Sequence: **Branching in Git** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Then **Merging in Git** — a commit with two parents <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Stop before **Rebase Introduction** (Appendix A) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Sandbox commands do not change `hello-git` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Merge, Squash and Merge, and Rebase and Merge <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Merge, Squash and Merge, and Rebase and Merge <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [GitHub](https://github.com/) merges through a pull request <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Merging a pull request](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/merging-a-pull-request) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Dropdown: **Create a merge commit**, **Squash and merge**, **Rebase and merge** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A new personal repo offers all three ([About merge methods](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github)) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Leave reviewers empty; do not open a draft <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Merge, Squash and Merge, and Rebase and Merge <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* `status-line` → `main`: **Create a merge commit** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The new commit on `main` has **2 parents** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Accept the default merge message; it names the pull request <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Then delete `status-line`; `main` still has the snapshots <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Merge, Squash and Merge, and Rebase and Merge <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Branch from current `main` each time; add a new line at the end of `README.md` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `squash-line`: **Squash and merge** → **1 parent**, new SHA <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `rebase-line`: **Rebase and merge** → **1 parent**, same subject, new SHA, no merge commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Compare SHAs before you delete the branch <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Fast-Forward vs a Merge Commit <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### Fast-Forward vs a Merge Commit <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Fast-forward: the base name slides to a commit that already exists <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Pro Git: Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Possible when `main` has not moved since you branched <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No new snapshot; the SHA stays the one you made <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Fast-Forward vs a Merge Commit <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* **Create a merge commit** uses `--no-ff` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* You get two parents even when a fast-forward was possible <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Squash and rebase fast-forward onto commits they just created <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Rebase and merge always writes new SHAs ([About merge methods](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github)) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* If `main` moved, a fast-forward is impossible; conflicts are a later chapter <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### When Each GitHub Merge Button Fits <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### When Each GitHub Merge Button Fits <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Same resulting tree; different history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* **Create a merge commit:** keep the join and every branch commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Noisy `wip` commits stay on `main` too <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Use it when that trail is worth reading later <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### When Each GitHub Merge Button Fits <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* **Squash and merge:** one snapshot on the default branch <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* You lose the small commits' times and authors as separate objects on `main` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Title the pull request in the imperative: `Add a squash practice line` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Delete the branch; a later pull request from it can show those commits again <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### When Each GitHub Merge Button Fits <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* **Rebase and merge:** keep each subject, in a straight line <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* New SHAs; no merge bubble; not an interactive rebase <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No force-push on this path (Appendix A) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A merge queue or a ruleset can remove the dropdown <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Reading the Network Graph <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### Reading the Network Graph <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* URL: `/YOUR-USERNAME/hello-git/network` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Or **Insights** → **Network** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Understanding connections between repositories](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A dot is a commit; a line is a branch <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Reading the Network Graph <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* The `status-line` merge has two incoming lines <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Squash and rebase stay on the `main` line, one parent each <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Forks would be more lines; you have not forked <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The graph can lag; the Commits page updates immediately <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Two lines: merge commit. One line: squash or rebase-and-merge <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Summary: Branches and Merging <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Summary: Branches and Merging <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A branch is a pointer; `main` is the default name on `hello-git` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `scratch` deleted; `status-line` committed while `main` stayed still <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Learn Git Branching](https://learngitbranching.js.org/): branching and merging, not rebase <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Merge commit: `--no-ff`, two parents <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Squash: one new SHA. Rebase: same subject, new SHA, one parent <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Network graph: two lines versus one line <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Next: Pull Requests, Forks, and Code Review <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
         </textarea>
       </section>
     </div>
