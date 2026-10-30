@@ -1159,6 +1159,334 @@
 * Web extensions: [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github), [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens); not [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
 * Graph sandbox: [Learn Git Branching](https://learngitbranching.js.org/); Codespaces optional <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
 * Next: Repositories, Files, and Commits <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+## Repositories, Files, and Commits <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+## Repositories, Files, and Commits <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* First chapter where you create [Git](https://git-scm.com/) history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Personal [GitHub](https://github.com/) account, browser only <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No local `git`, no [GitHub Desktop](https://desktop.github.com/), no [GitHub Codespaces](https://github.com/features/codespaces/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Repository `hello-git`, then add, edit, and delete <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commit directly to the default branch <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Branches and pull requests come later <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Creating a Repository on GitHub <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Creating a Repository on GitHub <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* [github.com/new](https://github.com/new), or **+** → **New repository** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Owner: your personal account <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Name: `hello-git` (letters, digits, `.`, `-`, `_`) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Public or Private on [GitHub Free](https://docs.github.com/en/get-started/learning-about-github/githubs-products) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No passwords, keys, or `.env` files <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Creating a Repository on GitHub <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Select **Add a README file** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Leave gitignore, license, and template unset <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Leave [GitHub Marketplace](https://github.com/marketplace) apps unchecked <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* **Create repository** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Code tab shows `README.md` and **1 commit** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Root message is usually **Initial commit**; branch is usually `main` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Creating a Repository on GitHub <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Empty repo: Quick setup is terminal instructions <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Quickstart for repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Leave the terminal block alone <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* **Add file** → **Create new file** → `README.md` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* That file becomes the root commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### The README as the First File <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### The README as the First File <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Front door, rendered under the file list <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [About the repository README file](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Root, `.github`, or `docs`; we use the root <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* One honest sentence is enough for `hello-git` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### The README as the First File <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Checkbox writes one snapshot <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Blob: bytes of `README.md` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Tree: the path listing <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Root commit: no parent, usually `Initial commit` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* License and gitignore on the same form would be more blobs, not more commits <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### The README as the First File <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* URL shape: `/blob/main/README.md` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Branch name means the current tip <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Press `y` to swap in the full SHA <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Getting permanent links to files](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Rendered page is a view; the commit is the object <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### License, gitignore, and Template Choices <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### License, gitignore, and Template Choices <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Leave all three off for `hello-git` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* License file tells others what they may do <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Licensing a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Guide: [choosealicense.com](https://choosealicense.com/) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* No license file: default copyright, not a grant to copy <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Add one later only when you mean it ([Adding a license to a repository](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository)) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### License, gitignore, and Template Choices <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* `.gitignore` lists paths left out of future snapshots <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Ignoring files](https://docs.github.com/en/get-started/git-basics/ignoring-files) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Menu comes from [github/gitignore](https://github.com/github/gitignore) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Patterns and secrets: Releases, Ignore Files, and Repository Hygiene <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### License, gitignore, and Template Choices <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* **Choose a template** copies files, not history <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Starts with a single new commit <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A fork copies parent history (later chapter) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Template branches have unrelated histories <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* README on; license, gitignore, and template off <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Making Your First Commit in the GitHub Web Editor <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Making Your First Commit in the GitHub Web Editor <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Next snapshot: new tree, one parent, you, your message <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Web editor folds working tree, index, and commit into one dialog <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Editing files](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) shows Changes vs Staged; stay in the simple editor here <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Object: [About commits](https://docs.github.com/en/pull-requests/reference/commits) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Making Your First Commit in the GitHub Web Editor <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* **Commit directly** to the default branch (`main` on a new repo) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The other radio starts a branch and a pull request <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [GitHub](https://github.com/) prefers a branch on shared repos ([GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* On `hello-git` you are the only writer <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Button reads **Commit changes**, not **Propose changes** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Making Your First Commit in the GitHub Web Editor <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Dialog lists verified emails on your account <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Email privacy uses a [GitHub](https://github.com/) `noreply` address <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Setting your commit email address](https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/) stores that email; you do not install [Git](https://git-scm.com/) to set it <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Adding, Editing, and Deleting Files <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### Adding, Editing, and Deleting Files <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* **Add file** → **Create new file** → `NOTES.md` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Creating new files](https://docs.github.com/en/repositories/working-with-files/managing-files/creating-new-files) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Message: `Add a practice note` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commit directly; commit count becomes 2 <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Upload can batch files ([Adding a file to a repository](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository)); we add one path <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Adding, Editing, and Deleting Files <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Edit `README.md` with the pencil, not [github.dev](https://docs.github.com/en/codespaces/the-githubdev-web-based-editor) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Add: `Created in the browser, without installing Git.` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Message: `Describe the practice repository` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Replace the suggested `Update README.md` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Adding, Editing, and Deleting Files <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* `NOTES.md` → file menu → **Delete file** <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Deleting files in a repository](https://docs.github.com/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Message: `Remove the practice note` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Emptying the text box would leave an empty blob <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The path is gone from the tip; the parent tree still has the blob <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A secret deleted on the tip is still in older commits <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Adding, Editing, and Deleting Files <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Four commits: Initial, add, edit, delete <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* All on the default branch <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Deleting a path does not rewrite the old snapshot <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Commit Messages That Future You Can Use <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### Commit Messages That Future You Can Use <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* The message is inside the commit object; the hash covers it <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Changing it later is a rewrite (Appendix A) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Guidelines: [Pro Git](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Imperative subject: `Add a practice note` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Say why the snapshot exists, not only the filename <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Commit Messages That Future You Can Use <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* One skimmable line; [Pro Git](https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#_commit_guidelines) aims at about 50 characters <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Extended description is the body: why, when the subject is not enough <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The diff already shows which lines moved <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* One author is enough; several authors and signed commits wait <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Replace `Update README.md`, `Create NOTES.md`, and `Delete NOTES.md` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Reading History Without a Terminal <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Reading History Without a Terminal <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* A line of snapshots; only the root has no parent <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Read it in the browser; no `git log` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Same [Git](https://git-scm.com/) objects on another host, different labels <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* These clicks are [GitHub](https://github.com/)'s <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### The Commits Page <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### The Commits Page <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Code tab → commit count <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* URL: `/YOUR-USERNAME/hello-git/commits/main` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* One branch, newest first <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Each row: subject, author, when, short SHA <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Short SHA is a prefix; open the commit for the full hash <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### The Commits Page <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* File **History** omits commits that did not touch that file <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Comparing commits](https://docs.github.com/en/pull-requests/how-tos/commit-changes/comparing-commits) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* When a file history looks short, use the repository Commits page <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Forks and other branches are the [Network graph](https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/understanding-connections-between-repositories), later <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Top: `Remove the practice note`. Bottom: `Initial commit` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Inspecting a Commit Diff <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### Inspecting a Commit Diff <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Open a subject; URL is `/commit/SHA` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [About commits](https://docs.github.com/en/pull-requests/reference/commits) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Subject, author, time, **1 parent**, full SHA, changed files <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Highlighting is a patch [GitHub](https://github.com/) computed between two trees <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* [Git](https://git-scm.com/) stored the trees, not the patch <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Inspecting a Commit Diff <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* README edit: the line you added <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `Remove the practice note`: `NOTES.md` deleted <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `Add a practice note`: `NOTES.md` added <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Same path, two commits, two directions <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The file list is paths that changed, not the whole tree <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Blobs, Trees, and Parents as GitHub Shows Them <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+#### Blobs, Trees, and Parents as GitHub Shows Them <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* `/blob/<ref>/<path>` — one file <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `/tree/<ref>` — a directory, or the root <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `/commit/<sha>` — one snapshot <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* A branch name moves; a SHA does not <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Blobs, Trees, and Parents as GitHub Shows Them <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* **1 parent** is the previous snapshot <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Walk delete → README edit → add → `Initial commit` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The root lists no parent <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `/tree/SHA` of the add commit still lists `NOTES.md` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* The branch tip does not <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+#### Blobs, Trees, and Parents as GitHub Shows Them <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* Press `y` on `/blob/main/...` to pin the tip SHA <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Docs: [Getting permanent links to files](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files) <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `/blob/main/` means whatever the tip is later <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* `/commit/` names the snapshot; `/tree/` lists it; `/blob/` is one file <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Parents walk backward; the root stops the walk <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+
+---
+
+### Summary: Repositories, Files, and Commits <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+---
+
+### Summary: Repositories, Files, and Commits <!-- .slide: data-transition="zoom" data-transition-speed="slow" -->
+
+* `hello-git` on your personal account; README on; license, gitignore, template off <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Root commit: tree, blob, no parent, `Initial commit` <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Add, edit, delete in the web editor; **Commit directly** to the default branch <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Imperative subjects, not [GitHub](https://github.com/)'s filename suggestions <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Commits page: one branch, newest first; commit page: computed diff vs parent <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Deleted `NOTES.md` is gone from the tip and still in the older tree <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
+* Next: Branches and Merging <!-- .element: class="fragment custom blur highlight-current-blue fade-up" -->
         </textarea>
       </section>
     </div>
